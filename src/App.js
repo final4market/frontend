@@ -5,6 +5,7 @@ import AdminMembers from './admin/components/AdminMembers/AdminMembers';
 import AdminReports from './admin/components/AdminReports/AdminReports';
 import ProductRegistration from './components/productRegistration/ProductRegistration';
 import MyStore from './components/mypage/MyStore';
+import Main from "./components/sub_page/Sub_main";
 
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/admin" element={<Navigate to="/admin/reports" />} />
         <Route path="/admin/members" element={<AdminMembers />} />
-        <Route path="/admin/reports" element={<AdminReports />} />          
+        <Route path="/admin/reports" element={<AdminReports />} />
+        <Route path="/productPage" element={<Main/>}></Route>
         <Route path="/productRegister" element={<ProductRegistration/>} />
         <Route path="/myStore" element={<MyStore/>} />
       </Routes>
