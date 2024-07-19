@@ -35,7 +35,6 @@ const AdminReports = () => {
       setUnreadReports(unread);
       setSearchResults(read);
     } catch (error) {
-      console.error('신고 내역 가져오기 오류:', error);
     }
   };
 
