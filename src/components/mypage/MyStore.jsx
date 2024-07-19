@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+import Header from './MypageHeader';
 import SideBar from './SideBar';
 import ProductCard from './ProductCard';
 import Footer from './Footer';

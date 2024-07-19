@@ -1,16 +1,16 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/headerCss/header.css';
+import './Header.module.css';
 
 export default () => {
   const chatArea = useRef();
 
   const chatWidth = () => {
-      chatArea.current.style.width = '600px';
+    chatArea.current.style.width = '600px';
   };
 
   const closeChat = () => {
-      chatArea.current.style.width = '0';
+    chatArea.current.style.width = '0';
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MemberService from '../../../services/MemberService';
-import AdminHeader from '../AdminHeader/AdminHeader';
-import AdminPopup from '../AdminPopup/AdminPopup';
+import AdminHeader from '../adminHeader/AdminHeader';
+import AdminPopup from '../adminPopup/AdminPopup';
 import styles from './AdminMembers.module.css';
 
 const AdminMembers = () => {

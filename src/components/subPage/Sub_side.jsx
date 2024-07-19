@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Payment from './Sub_payment';
 
-const Sub_side = ({ isOpen, onClose, productImage , productInfo }) => {
+const Sub_side = ({ isOpen, onClose, productImage, productInfo }) => {
   const tradeMethodContainer = useRef();
   const purchaseContainer = useRef();
   const purchaseDirect = useRef();
@@ -29,7 +29,7 @@ const Sub_side = ({ isOpen, onClose, productImage , productInfo }) => {
   };
 
   const closePurchase = () => {
-    setIsPurchaseOpen(false); 
+    setIsPurchaseOpen(false);
     onClose();
   };
 
@@ -90,22 +90,22 @@ const Sub_side = ({ isOpen, onClose, productImage , productInfo }) => {
         </div>
         <hr />
         <div className='buyer_address'>
-          <h2>배송정보</h2>  
+          <h2>배송정보</h2>
           <p>집</p>
           <span>이름</span>
           <span>전화번호</span>
           <p>주소</p>
-        <button type='button' className='change_address'>변경</button>
+          <button type='button' className='change_address'>변경</button>
         </div>
         <hr />
         <div className='buyMethod_container'>
           <h2>결제방법</h2>
           <div className='buyMethod'>
-          <span className={buyMehod === 'kakaopay' ? 'selected' : ''} onClick={() => setBuyMethod('kakaopay')}>카카오페이</span>
-          <span className={buyMehod === 'tosspay' ? 'selected' : ''} onClick={() => setBuyMethod('tosspay')}>토스페이</span>
-          <span className={buyMehod === 'payco' ? 'selected' : ''} onClick={() => setBuyMethod('payco')}>PAYCO</span>
-          <span className={buyMehod === 'html5_inicis' ? 'selected' : ''} onClick={() => setBuyMethod('html5_inicis')}>카드결제</span>
-        </div>
+            <span className={buyMehod === 'kakaopay' ? 'selected' : ''} onClick={() => setBuyMethod('kakaopay')}>카카오페이</span>
+            <span className={buyMehod === 'tosspay' ? 'selected' : ''} onClick={() => setBuyMethod('tosspay')}>토스페이</span>
+            <span className={buyMehod === 'payco' ? 'selected' : ''} onClick={() => setBuyMethod('payco')}>PAYCO</span>
+            <span className={buyMehod === 'html5_inicis' ? 'selected' : ''} onClick={() => setBuyMethod('html5_inicis')}>카드결제</span>
+          </div>
         </div>
         <hr />
         <div className='Payment_amount'>
@@ -113,7 +113,7 @@ const Sub_side = ({ isOpen, onClose, productImage , productInfo }) => {
             <h2>최종 결제 금액</h2>
             <p className='last_price'>{productInfo.productPrice.toLocaleString()}원</p>
           </div>
-          <Payment buyMehod={buyMehod}/>
+          <Payment buyMehod={buyMehod} />
         </div>
       </div>
     </>
