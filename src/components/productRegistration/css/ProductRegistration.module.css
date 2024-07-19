@@ -1,4 +1,4 @@
-.container {
+.productContainer {
   max-width: 70%;
   margin: 0 auto;
   padding: 20px;
@@ -7,7 +7,7 @@
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.heafer{
+.productHeader{
   padding-right: 20px;
 }
 .categorySelect,
@@ -69,24 +69,24 @@ label {
   background-color: #555;
 }
 
-.radioLabel {
+.productRadioLabel {
   display: inline-block;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #CCCCCC;
-  width: 65px;
+  width: 90px;
   height: 20px;
   text-align: center;
   margin-right: 10px;
   cursor: pointer;
 }
 
-.radioLabel input[type="radio"] {
+.productRadioLabel input[type="radio"] {
   display: none;
 }
 
-.radioLabel.selected {
-  background-color: #D3D3D3; /* 원하는 배경색으로 변경 */
+.productRadioLabel.selected {
+  background-color: #D3D3D3; 
 }
 
 .red {

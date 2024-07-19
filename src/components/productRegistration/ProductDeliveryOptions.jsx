@@ -4,7 +4,7 @@ import styles from './css/ProductRegistration.module.css'
 const DeliveryOptions = ({ formData, handleChange, errors }) => {
     return (
         <div className={styles.directDeal}>
-            <label className={`${styles.radioLabel} ${formData.deliveryNo === '1' ? styles.selected : ''}`}>
+            <label className={`${styles.productRadioLabel} ${formData.deliveryNo === '1' ? styles.selected : ''}`}>
                 <input
                     type="radio"
                     name="deliveryNo"
@@ -14,7 +14,7 @@ const DeliveryOptions = ({ formData, handleChange, errors }) => {
                 />
                 무료배송
             </label>
-            <label className={`${styles.radioLabel} ${formData.deliveryNo === '2' ? styles.selected : ''}`}>
+            <label className={`${styles.productRadioLabel} ${formData.deliveryNo === '2' ? styles.selected : ''}`}>
                 <input
                     type="radio"
                     name="deliveryNo"
@@ -24,7 +24,7 @@ const DeliveryOptions = ({ formData, handleChange, errors }) => {
                 />
                 착불
             </label>
-            <label className={`${styles.radioLabel} ${formData.deliveryNo === '3' ? styles.selected : ''}`}>
+            <label className={`${styles.productRadioLabel} ${formData.deliveryNo === '3' ? styles.selected : ''}`}>
                 <input
                     type="radio"
                     name="deliveryNo"

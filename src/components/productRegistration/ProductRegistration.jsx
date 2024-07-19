@@ -100,6 +100,7 @@ export default function ProductRegistration() {
             deliveryNo: '',
             productContent: '',
             deliveryCharge: '',
+
         };
 
         if (!formData.productTitle) {
@@ -183,10 +184,10 @@ export default function ProductRegistration() {
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.productContainer}>
             <form onSubmit={handleSubmit}>
                 <ProductImageUpload />
-                <div className={styles.heafer}>
+                <div className={styles.productHeader}>
                     <input
                         type="text"
                         ref={productTitle}
@@ -226,7 +227,7 @@ export default function ProductRegistration() {
                     onParentChange={(value) => setParentNumber(value)}
                 />
 
-                <div className={styles.heafer}>
+                <div className={styles.productHeader}>
                     <textarea
                         name="productContent"
                         ref={productContent}
@@ -238,7 +239,7 @@ export default function ProductRegistration() {
                 </div>
 
                 <div className={styles.productState}>
-                    <label className={`${styles.radioLabel} ${formData.productStatus === '새상품' ? styles.selected : ''}`}>
+                    <label className={`${styles.productRadioLabel} ${formData.productStatus === '새상품' ? styles.selected : ''}`}>
                         <input
                             type="radio"
                             name="productStatus"
@@ -248,7 +249,7 @@ export default function ProductRegistration() {
                         />
                         새상품
                     </label>
-                    <label className={`${styles.radioLabel} ${formData.productStatus === '중고' ? styles.selected : ''}`}>
+                    <label className={`${styles.productRadioLabel} ${formData.productStatus === '중고' ? styles.selected : ''}`}>
                         <input
                             type="radio"
                             name="productStatus"
@@ -297,6 +298,8 @@ export default function ProductRegistration() {
                 message={popup.message}
                 isConfirmation={popup.isConfirmation}
             />
+
+            
         </div>
     );
 }
