@@ -13,9 +13,11 @@
 .dropdownHeader {
   padding: 10px;
   border: 1px solid #ccc;
+  border-bottom: 0px;
   border-radius: 5px;
   background: #f9f9f9;
-  cursor: pointer;
+  font-size: 13px;
+  color: black;
 }
 
 .dropdownList {

@@ -231,7 +231,13 @@ export default function ProductRegistration() {
                     <textarea
                         name="productContent"
                         ref={productContent}
-                        placeholder="판매상품 상세 설명"
+                        placeholder="판매상품 상세 설명
+                        
+                        -구매시기
+                        - 사용 기간 
+                        - 하자 여부 
+                       * 실제 촬영한 사진과 함께 상세 정보를 입력해주세요.
+                       * 부적절한 게시물 등록시 삭제 및 이용제재 처리될수있어요."
                         className={styles.description}
                         onChange={handleChange}
                     />
@@ -262,7 +268,7 @@ export default function ProductRegistration() {
                     {errors.productStatus && <div className={`${styles.error} ${styles.red}`}>{errors.productStatus}</div>}
                 </div>
 
-                <div>
+                <div className={styles.ProductTransaction}>
                 <label>
                         <input
                             type='checkbox'

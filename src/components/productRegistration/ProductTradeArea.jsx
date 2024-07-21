@@ -37,9 +37,9 @@ const ProductTradeArea = ({ formData, handleChange }) => {
     }
 
     return (
-        <div className={styles.tradeArea}>
-            <button type="button" onClick={handleClick}>
-                주소찾기
+        <div>
+            <button type="button" onClick={handleClick}  className={styles.ProductTradeArea}>
+               직거래 주소 등록
             </button>
             <input
                 type="text"

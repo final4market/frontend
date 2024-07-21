@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './css/ProductRegistration.module.css'
+import styles from './css/ProductDeliveryOptions.module.css'
 
 const DeliveryOptions = ({ formData, handleChange, errors }) => {
     return (
@@ -38,7 +38,7 @@ const DeliveryOptions = ({ formData, handleChange, errors }) => {
                 <input
                     type="text"
                     name="deliveryCharge"
-                    placeholder="택배비를 입력하세요"
+                    placeholder="₩택배비"
                     value={formData.deliveryCharge}
                     onChange={handleChange}
                     className={styles.deliveryChargeInput}
