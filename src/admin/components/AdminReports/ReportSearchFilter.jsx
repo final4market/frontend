@@ -34,6 +34,7 @@ const ReportSearchFilter = ({
             className={styles.selectInput1}
             value={selectedSearchOption}
             onChange={handleSearchOptionChange}
+            onKeyDown={handleKeyDown} // Add onKeyDown handler
           >
             <option value="productNo">상품번호</option>
             <option value="sellerId">판매자 아이디</option>
@@ -45,6 +46,7 @@ const ReportSearchFilter = ({
             placeholder="검색어 입력"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown} // Add onKeyDown handler
           />
           <span className={styles.searchlabel}>신고일자: </span>
           <div>
@@ -54,6 +56,7 @@ const ReportSearchFilter = ({
               placeholder="시작일"
               value={searchDateTerm.startDate}
               onChange={(e) => setSearchDateTerm({ ...searchDateTerm, startDate: e.target.value })}
+              onKeyDown={handleKeyDown} // Add onKeyDown handler
             />
             <span className={styles.searchlabel}>~</span>
             <input
@@ -62,6 +65,7 @@ const ReportSearchFilter = ({
               placeholder="종료일"
               value={searchDateTerm.endDate}
               onChange={(e) => setSearchDateTerm({ ...searchDateTerm, endDate: e.target.value })}
+              onKeyDown={handleKeyDown} // Add onKeyDown handler
             />
             <span className={styles.searchlabel}>처리 상태: </span>
             <select
@@ -69,6 +73,7 @@ const ReportSearchFilter = ({
               className={styles.selectInput2}
               value={selectedProcessStatusOption}
               onChange={handleProcessStatusChange}
+              onKeyDown={handleKeyDown} // Add onKeyDown handler
             >
               <option value="">-----</option>
               <option value="N">신규</option>
