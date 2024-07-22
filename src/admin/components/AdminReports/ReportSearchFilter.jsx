@@ -12,7 +12,7 @@ const ReportSearchFilter = ({
   handleProcessStatusOptionChange,
   handleSearch,
   handleReset,
-  handleKeyDown, // Receive handleKeyDown as a prop
+  handleKeyDown,
   notification
 }) => {
 
@@ -21,7 +21,7 @@ const ReportSearchFilter = ({
   const handleProcessStatusChange = (event) => {
     handleProcessStatusOptionChange(event);
     if (processStatusRef.current) {
-      processStatusRef.current.blur(); // Defocus the select box
+      processStatusRef.current.blur();
     }
   };
 
@@ -34,7 +34,7 @@ const ReportSearchFilter = ({
             className={styles.selectInput1}
             value={selectedSearchOption}
             onChange={handleSearchOptionChange}
-            onKeyDown={handleKeyDown} // Add onKeyDown handler
+            onKeyDown={handleKeyDown}
           >
             <option value="productNo">상품번호</option>
             <option value="sellerId">판매자 아이디</option>
