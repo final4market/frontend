@@ -4,7 +4,7 @@ import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
 import MypagReviewWrite from './MypagReviewWrite';
 
-const MypageProductSalesList = () => {
+const MypageProductPurchaseHistory = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const [showReviewForm, setShowReviewForm] = useState({}); // 리뷰 작성 폼 상태
   const memberId = 'member4';
@@ -72,7 +72,7 @@ const MypageProductSalesList = () => {
       <div className={styles.MypageProductSalesListComponent}>
         <MypageSideBar />
         <div>
-          <h3>최근판매내역 ({reviewWritable.length})</h3>
+          <h3>최근구매내역 ({reviewWritable.length})</h3>
           {reviewWritable.map((memberProduct, index) => (
             <div key={index}>
               <div className={styles.MypageProductSalesList}>
@@ -99,7 +99,7 @@ const MypageProductSalesList = () => {
             </div>
           ))}
 
-          <h3>판매내역({reviewExpired.length})</h3>
+          <h3>구매내역({reviewExpired.length})</h3>
           {reviewExpired.map((memberProduct, index) => (
             <div key={index}>
               <div className={styles.MypageProductSalesList}>
@@ -121,4 +121,4 @@ const MypageProductSalesList = () => {
   );
 };
 
-export default MypageProductSalesList;
+export default MypageProductPurchaseHistory;
