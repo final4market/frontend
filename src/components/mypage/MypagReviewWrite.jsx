@@ -2,23 +2,27 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import styles from './css/MypagReviewWrite.module.css';
 
-const MypagReviewWrite = ({ productNo, buyerId }) => {
+const MypagReviewWrite = ({ productNo, buyerId, sellerId }) => {
   const [reviewScore, setreviewScore] = useState(0);
   const [hover, setHover] = useState(0);
   const reviewText = useRef();
 
   const submitReview = async () => {
-    const review = {
-      productNo,
-      buyerId,
-      reviewScore,
-      reviewText: reviewText.current.value
-    };
-
-    console.log('Review to submit:', review); // 리뷰 객체 콘솔에 출력
-
+    const review = new URLSearchParams();
+    review.append('productNo', productNo);
+    review.append('buyerId', buyerId);
+    review.append('sellerId', sellerId);
+    review.append('reviewScore', reviewScore);
+    review.append('reviewText', reviewText.current.value);
+  
+    console.log('Review to submit:', review.toString()); // 리뷰 객체 콘솔에 출력
+  
     try {
-      const response = await axios.post('http://localhost:9999/review/insert', review);
+      const response = await axios.post('http://localhost:9999/review/insert', review.toString(), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
       console.log(response);
       alert(response.data.msg);
       if (response.data.result) {
@@ -31,7 +35,6 @@ const MypagReviewWrite = ({ productNo, buyerId }) => {
       alert('리뷰 제출에 실패했습니다. 다시 시도해주세요.');
     }
   };
-
   return (
     <div className={styles.reviewContainer}>
       <div className={styles.reviewScore}>

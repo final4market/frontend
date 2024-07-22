@@ -7,11 +7,11 @@ import MypagReviewWrite from './MypagReviewWrite';
 const MypageProductPurchaseHistory = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const [showReviewForm, setShowReviewForm] = useState({}); // 리뷰 작성 폼 상태
-  const memberId = 'member4';
+  const buyerId = 'member5';
 
   const readData = async () => {
     try {
-      const response = await axios.get(`http://localhost:9999/member/productSales/list/${memberId}`);
+      const response = await axios.get(`http://localhost:9999/member/ProductPurchaseHistory/${buyerId}`);
       console.log(response.data); // 응답 데이터 구조 확인
       setMemberProductList(response.data);
     } catch (error) {
@@ -94,7 +94,9 @@ const MypageProductPurchaseHistory = () => {
               </div>
               {showReviewForm[index] && <MypagReviewWrite 
                productNo={memberProduct.productNo}
-               buyerId={memberId}
+               buyerId={buyerId}
+               sellerId={memberProduct.memberId}
+
                />}
             </div>
           ))}
