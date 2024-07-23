@@ -26,7 +26,7 @@ export default function SideBar() {
           <Link to="/" className={`${styles.side_item} ${styles.writed_review}`}>작성 후기</Link>
         </li>
         <li className={styles.side_li}>
-          <Link to="/" className={`${styles.side_item} ${styles.received_review}`}>받은 후기</Link>
+          <Link to="/receivedReview" className={`${styles.side_item} ${styles.received_review}`}>받은 후기</Link>
         </li>
         <li className={styles.side_li}>
           <Link to="/" className={`${styles.side_item} ${styles.follow_list}`}>팔로우 목록</Link>

@@ -14,17 +14,34 @@
   display: flex;
 }
 
-.interest_product {
+.received_review {
   display: flex;
   font-size: 24px;
   padding: 20px 0px;
 }
 
-.my_product {
+.nav_container .nav_ul {
   width: 700px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: center;
+  font-size: 24px;
+}
+
+.nav_container .nav_ul .nav_li {
+  width: 200px;
+  border-bottom: 1px solid black;
+  list-style-type: none;
+  text-align: center;
+}
+
+.nav_container .nav_ul .nav_li:hover {
+  border-bottom: 1px solid red;
+}
+
+.nav_container .nav_ul .nav_li .nav_item {
+  color: black;
+  text-decoration: none;
 }
 
 .banner {

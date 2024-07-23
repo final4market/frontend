@@ -23,9 +23,9 @@
   background-image: url('/public/img/mypage/profile.png');
   background-repeat: no-repeat;
   background-position: 5px;
-  padding-left: 60px;
-  margin: 20px 0px;
   font-size: 24px;
+  margin: 20px 0px;
+  padding-left: 60px;
 }
 
 .my_score {
@@ -64,8 +64,8 @@
 }
 
 .banner {
-  width: 300px;
+  width: 200px;
   border: 1px solid black;
   text-align: center;
-  margin: 20px 50px;
+  margin: 20px;
 }

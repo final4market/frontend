@@ -102,8 +102,8 @@
 }
 
 .banner {
-  width: 300px;
+  width: 200px;
   border: 1px solid black;
   text-align: center;
-  margin: 20px 50px;
+  margin: 20px;
 }
