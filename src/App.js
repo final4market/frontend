@@ -7,7 +7,6 @@ import LoginForm from './components/auth/LoginForm';
 import ProductRegistration from './components/productRegistration/ProductRegistration';
 import MypageProductSalesList from './components/myPage/MypageProductSalesList';
 import MypageProductPurchaseHistory from './components/myPage/MypageProductPurchaseHistory';
-import MyStore from './components/myPage/MyStore';
 import MyInfo from './components/myPage/MyInfo';
 import InterestProduct from './components/myPage/InterestProduct';
 import ReceivedReview from './components/myPage/ReceivedReview';
@@ -19,10 +18,9 @@ function App() {
   return (
     <Router>
       <Routes>
-
         <Route path="/login" element={<LoginForm />} />
         <Route path="/productPage" element={<SubMain/>} />
-        <Route path="/myStore" element={<MyStore/>}/>
+ {/*        <Route path="/myStore" element={<MyStore/>}/> */}
         <Route path="/myInfo" element={<MyInfo/>}/>
         <Route path="/productRegister" element={<ProductRegistration/>} />
         <Route path="/sell-history" element={<MypageProductSalesList />} />
