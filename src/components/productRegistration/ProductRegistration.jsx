@@ -80,7 +80,7 @@ export default function ProductRegistration() {
     useEffect(() => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-           
+
         }));
     }, [directTransaction]);
 
@@ -269,7 +269,7 @@ export default function ProductRegistration() {
                 </div>
 
                 <div className={styles.ProductTransaction}>
-                <label>
+                    <label>
                         <input
                             type='checkbox'
                             name='deliveryTransaction'
@@ -305,7 +305,7 @@ export default function ProductRegistration() {
                 isConfirmation={popup.isConfirmation}
             />
 
-            
+
         </div>
     );
 }

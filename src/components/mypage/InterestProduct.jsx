@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import Header from "./Header";
+import Header from "../header/Header";
 import ProductCard from "./ProductCard";
 import SideBar from "./SideBar";
 import styles from "./css/InterestProduct.module.css";
@@ -34,20 +34,20 @@ const product = [
 export default function InterestProduct() {
   return (
     <div className={styles.header_container}>
-      <Header/>
+      <Header />
       <div className={styles.side_container}>
-        <SideBar/>
+        <SideBar />
         <div className={styles.main_container}>
           <div className={styles.interest_product}>관심 상품</div>
           <div className={styles.my_product}>
             {product.map((product, index) => (
-              <ProductCard key={index} product={product}/>
-           ))}
+              <ProductCard key={index} product={product} />
+            ))}
           </div>
         </div>
         <div className={styles.banner}>배너</div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
