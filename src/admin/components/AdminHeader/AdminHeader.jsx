@@ -1,8 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './AdminHeader.module.css';
 
 const AdminHeader = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    // 로그아웃 시 토큰 제거
+    localStorage.removeItem('token');
+
+    // 메인으로 돌아가기
+    navigate('/');
+  };
   return (
     <div className={styles.adminHeaderContainer}>
       <div className={styles.adminHeader}>
@@ -13,7 +23,7 @@ const AdminHeader = () => {
           </div>
           <div className={styles.adminHeaderRightSection}>
             <NavLink to="/admin/info" className={styles.adminHeaderInfoLink}>관리자정보</NavLink>
-            <NavLink to="/" className={styles.adminHeaderLogoutLink}>로그아웃</NavLink>
+            <NavLink to="/" className={styles.adminHeaderLogoutLink} onClick={handleLogout}>로그아웃</NavLink>
           </div>
         </div>
         <div className={styles.adminHeaderBottom}>
