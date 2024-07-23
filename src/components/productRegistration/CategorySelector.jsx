@@ -1,11 +1,14 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './css/CategorySelector.module.css';
 
-const CategorySelector = forwardRef(({ onCategoryChange, onParentChange }, ref) => {
+const CategorySelector = ({ onCategoryChange, onParentChange }) => {
     const [parentNumberOptions, setParentNumberOptions] = useState([]);
     const [productCategoryList, setProductCategoryList] = useState([]);
     const [parentNumber, setParentNumber] = useState('1');
+    const [selectedParent, setSelectedParent] = useState('카테고리를 선택하세요');
+    const [selectedCategory, setSelectedCategory] = useState('카테고리를 선택하세요');
+    const [isSecondDropdownVisible, setIsSecondDropdownVisible] = useState(false);
 
     useEffect(() => {
         const fetchParentNumbers = async () => {
@@ -31,32 +34,53 @@ const CategorySelector = forwardRef(({ onCategoryChange, onParentChange }, ref) 
         fetchCategories();
     }, [parentNumber]);
 
-    return (
-        <div>
-            <select
-                className={styles.categorySelect}
-                value={parentNumber}
-                onChange={(e) => {
-                    setParentNumber(e.target.value);
-                    onParentChange(e.target.value);
-                }}
-            >
-                {parentNumberOptions.map((item) => (
-                    <option key={item.categoryNo} value={item.categoryNo}>{item.categoryName}</option>
-                ))}
-            </select>
+    const handleParentChange = (option) => {
+        setParentNumber(option.categoryNo);
+        setSelectedParent(option.categoryName);
+        setIsSecondDropdownVisible(true);
+        onParentChange(option.categoryNo);
+    };
 
-            <select
-                ref={ref} // Forward ref here
-                onChange={(e) => onCategoryChange(e.target.value)}
-                className={styles.categorySelect}
-            >
-                {productCategoryList.map((item) => (
-                    <option key={item.categoryNo} value={item.categoryNo}>{item.categoryName}</option>
-                ))}
-            </select>
+    const handleCategoryChange = (option) => {
+        setSelectedCategory(option.categoryName);
+        onCategoryChange(option.categoryNo);
+    };
+
+    return (
+        <div className={styles.category}>
+            <div className={styles.customDropdown}>
+                <div className={styles.dropdownHeader}>{selectedParent}</div>
+                <ul className={styles.dropdownList}>
+                    {parentNumberOptions.map((option) => (
+                        <li
+                            key={option.categoryNo}
+                            onClick={() => handleParentChange(option)}
+                            className={`${styles.dropdownItem} ${parentNumber === option.categoryNo ? styles.selectedItem : ''}`}
+                        >
+                            {option.categoryName}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {isSecondDropdownVisible && (
+                <div className={styles.customDropdown}>
+                    <div className={styles.dropdownHeader}>{selectedCategory}</div>
+                    <ul className={styles.dropdownList}>
+                        {productCategoryList.map((option) => (
+                            <li
+                                key={option.categoryNo}
+                                onClick={() => handleCategoryChange(option)}
+                                className={`${styles.dropdownItem} ${selectedCategory === option.categoryName ? styles.selectedItem : ''}`}
+                            >
+                                {option.categoryName}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
-});
+};
 
 export default CategorySelector;

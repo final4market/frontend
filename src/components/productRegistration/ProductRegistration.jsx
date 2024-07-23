@@ -9,7 +9,6 @@ import CategorySelector from './CategorySelector';
 
 export default function ProductRegistration() {
     const productTitle = useRef();
-    const selectCategoryNo = useRef();
     const productContent = useRef();
     const productPrice = useRef();
     const deliveryCharge = useRef();
@@ -22,12 +21,12 @@ export default function ProductRegistration() {
         tradeArea: '',
         directDeal: 'select',
         deliveryCharge: '',
+        categoryNo: '' // Add categoryNo to formData
     });
 
     const [parentNumberOptions, setParentNumberOptions] = useState([]);
     const [parentNumber, setParentNumber] = useState('1');
 
-    // 오류 상태와 팝업 상태 추가
     const [errors, setErrors] = useState({
         productTitle: '',
         productPrice: '',
@@ -67,11 +66,6 @@ export default function ProductRegistration() {
         readData();
     }, [parentNumber]);
 
-    const parentchange = (e) => {
-        const { value } = e.target;
-        setParentNumber(value);
-    };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -82,11 +76,11 @@ export default function ProductRegistration() {
 
     const [deliveryTransaction, setDeliveryTransaction] = useState(false);
     const [directTransaction, setDirectTransaction] = useState(false);
-    
+
     useEffect(() => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            tradeArea: directTransaction ? 'seoul' : '',
+           
         }));
     }, [directTransaction]);
 
@@ -97,8 +91,6 @@ export default function ProductRegistration() {
         }));
     }, [deliveryTransaction]);
 
-
-
     const validateForm = () => {
         let valid = true;
         const newErrors = {
@@ -108,6 +100,7 @@ export default function ProductRegistration() {
             deliveryNo: '',
             productContent: '',
             deliveryCharge: '',
+
         };
 
         if (!formData.productTitle) {
@@ -149,7 +142,7 @@ export default function ProductRegistration() {
         const formDataToSend = new FormData();
         formDataToSend.append('productTitle', formData.productTitle);
         formDataToSend.append('productPrice', formData.productPrice);
-        formDataToSend.append('categoryNo', selectCategoryNo.current.value);
+        formDataToSend.append('categoryNo', formData.categoryNo); // Use categoryNo from formData
         formDataToSend.append('productContent', productContent.current.value);
         formDataToSend.append('productStatus', formData.productStatus);
         formDataToSend.append('deliveryNo', formData.deliveryNo);
@@ -159,17 +152,15 @@ export default function ProductRegistration() {
         const fileInputs = document.querySelectorAll('input[type="file"]');
         fileInputs.forEach((fileInput) => {
             const files = fileInput.files;
-            for (let i = 0; i < files.length ; i++) {
+            for (let i = 0; i < files.length; i++) {
                 formDataToSend.append('file', files[i]);
             }
         });
 
-        
-
         console.log('FormData to Send:');
-    for (let [key, value] of formDataToSend.entries()) {
-        console.log(`${key}: ${value}`);
-    }
+        for (let [key, value] of formDataToSend.entries()) {
+            console.log(`${key}: ${value}`);
+        }
 
         try {
             const response = await axios.post('http://localhost:9999/product/insert', formDataToSend, {
@@ -177,7 +168,6 @@ export default function ProductRegistration() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log(formDataToSend.values);
             setPopup({
                 show: true,
                 message: response.data.msg,
@@ -194,77 +184,68 @@ export default function ProductRegistration() {
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.productContainer}>
             <form onSubmit={handleSubmit}>
                 <ProductImageUpload />
-                      <div className={styles.heafer}>
+                <div className={styles.productHeader}>
+                    <input
+                        type="text"
+                        ref={productTitle}
+                        name="productTitle"
+                        placeholder="상품명"
+                        className={styles.productName}
+                        onChange={handleChange}
+                    />
+                    {errors.productTitle && <div className={`${styles.error} ${styles.red}`}>{errors.productTitle}</div>}
+                    <div className={styles.priceContainer}>
                         <input
                             type="text"
-                            ref={productTitle}
-                            name="productTitle"
-                            placeholder="상품명"
-                            className={styles.productName}
+                            name="productPrice"
+                            ref={productPrice}
                             onChange={handleChange}
+                            value={formData.productPrice === '0' ? '0' : formData.productPrice}
+                            placeholder="₩판매가격"
+                            className={styles.priceInput}
                         />
-                        {errors.productTitle && <div className={`${styles.error} ${styles.red}`}>{errors.productTitle}</div>}
-                      
-                        <div className={styles.priceContainer}>
-                            <input
-                                type="text"
-                                name="productPrice"
-                                ref={productPrice}
-                                onChange={handleChange}
-                                value={formData.productPrice === '0' ? '0' : formData.productPrice} 
-                                placeholder="₩판매가격"
-                                className={styles.priceInput}
-                            />
-                           
-                            <div className={styles.freeCheckbox}>
-                                <label htmlFor="free">
-                                    <input
-                                        type="checkbox"
-                                        id="free"
-                                        name="priceFree"
-                                        onChange={(e) => handleChange({ target: { name: 'productPrice', value: e.target.checked ? '0' : '' } })}
-                                    />
-                                    무료나눔
-                                </label>
-                            </div>
+                        <div className={styles.freeCheckbox}>
+                            <label htmlFor="free">
+                                <input
+                                    type="checkbox"
+                                    id="free"
+                                    name="priceFree"
+                                    onChange={(e) => handleChange({ target: { name: 'productPrice', value: e.target.checked ? '0' : '' } })}
+                                />
+                                무료나눔
+                            </label>
                         </div>
-                        {errors.productPrice && <div className={`${styles.error} ${styles.red}`}>{errors.productPrice}</div>}
-                        </div>
-             
+                    </div>
+                    {errors.productPrice && <div className={`${styles.error} ${styles.red}`}>{errors.productPrice}</div>}
+                </div>
 
-             {/*    <select value={parentNumber} onChange={parentchange} className={styles.categorySelect}>
-                    {parentNumberOptions.map((item) => (
-                        <option key={item.categoryNo} value={item.categoryNo}>{item.categoryName}</option>
-                    ))}
-                </select>
-
-                <select name="categoryNo" ref={selectCategoryNo} className={styles.categorySelect} onChange={handleChange}>
-                    {ProductCategoryList.map((item) => (
-                        <option key={item.categoryNo} value={item.categoryNo}>{item.categoryName}</option>
-                    ))}
-                </select> */}
-                 <CategorySelector
-                    ref={selectCategoryNo} // Pass ref here
+                <CategorySelector
                     onCategoryChange={(value) => setFormData({ ...formData, categoryNo: value })}
                     onParentChange={(value) => setParentNumber(value)}
                 />
-                
-                <div className={styles.heafer}>
-                <textarea
-                    name="productContent"
-                    ref={productContent}
-                    placeholder="판매상품 상세 설명"
-                    className={styles.description}
-                    onChange={handleChange}
-                />
-                {errors.productContent && <div className={`${styles.error} ${styles.red}`}>{errors.productContent}</div>}
+
+                <div className={styles.productHeader}>
+                    <textarea
+                        name="productContent"
+                        ref={productContent}
+                        placeholder="판매상품 상세 설명
+                        
+                        -구매시기
+                        - 사용 기간 
+                        - 하자 여부 
+                       * 실제 촬영한 사진과 함께 상세 정보를 입력해주세요.
+                       * 부적절한 게시물 등록시 삭제 및 이용제재 처리될수있어요."
+                        className={styles.description}
+                        onChange={handleChange}
+                    />
+                    {errors.productContent && <div className={`${styles.error} ${styles.red}`}>{errors.productContent}</div>}
                 </div>
 
                 <div className={styles.productState}>
-                    <label className={`${styles.radioLabel} ${formData.productStatus === '새상품' ? styles.selected : ''}`}>
+                    <label className={`${styles.productRadioLabel} ${formData.productStatus === '새상품' ? styles.selected : ''}`}>
                         <input
                             type="radio"
                             name="productStatus"
@@ -274,7 +255,7 @@ export default function ProductRegistration() {
                         />
                         새상품
                     </label>
-                    <label className={`${styles.radioLabel} ${formData.productStatus === '중고' ? styles.selected : ''}`}>
+                    <label className={`${styles.productRadioLabel} ${formData.productStatus === '중고' ? styles.selected : ''}`}>
                         <input
                             type="radio"
                             name="productStatus"
@@ -286,30 +267,35 @@ export default function ProductRegistration() {
                     </label>
                     {errors.productStatus && <div className={`${styles.error} ${styles.red}`}>{errors.productStatus}</div>}
                 </div>
-                
-                <div>
-                    <label>
-                    <input type='checkbox' name='directTransaction'
-                      checked={directTransaction}
-                      onChange={(e) => setDirectTransaction(e.target.checked)}/>
-                    직거래
+
+                <div className={styles.ProductTransaction}>
+                <label>
+                        <input
+                            type='checkbox'
+                            name='deliveryTransaction'
+                            checked={deliveryTransaction}
+                            onChange={(e) => setDeliveryTransaction(e.target.checked)}
+                        />
+                        택배거래
                     </label>
 
                     <label>
-                    <input
-                     type='checkbox' 
-                     name='deliveryTransaction'
-                     checked={deliveryTransaction}
-                     onChange={(e) => setDeliveryTransaction(e.target.checked)}/>
-                    택배거래
+                        <input
+                            type='checkbox'
+                            name='directTransaction'
+                            checked={directTransaction}
+                            onChange={(e) => setDirectTransaction(e.target.checked)}
+                        />
+                        직거래
                     </label>
                 </div>
-                  {deliveryTransaction && (
-                <ProductDeliveryOptions formData={formData} handleChange={handleChange} errors={errors} />
-            )}
-             {directTransaction && (
-                <ProductTradeArea formData={formData} handleChange={handleChange} />
-            )}
+
+                {deliveryTransaction && (
+                    <ProductDeliveryOptions formData={formData} handleChange={handleChange} errors={errors} />
+                )}
+                {directTransaction && (
+                    <ProductTradeArea formData={formData} handleChange={handleChange} />
+                )}
                 <button type="submit" className={styles.submitButton}>작성 완료</button>
             </form>
             <ProductinsertPopup
@@ -318,6 +304,8 @@ export default function ProductRegistration() {
                 message={popup.message}
                 isConfirmation={popup.isConfirmation}
             />
+
+            
         </div>
     );
 }
