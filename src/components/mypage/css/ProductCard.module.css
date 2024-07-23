@@ -1,18 +1,19 @@
 .product_card {
   width: 300px;
   margin: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #CCCCCC;
   padding: 10px;
-}
-
-.product_info {
-  font-size: 24px;
 }
 
 .product_card img {
   width: 100%;
   height: auto;
 }
+
+.product_info {
+  font-size: 24px;
+}
+
 
 .product_detail {
   text-align: right;

@@ -1,5 +1,10 @@
+<<<<<<< HEAD:src/components/mypage/MypageHeader.jsx
 import React from 'react';
 import styles from './css/MypageHeader.module.css';
+=======
+import React from "react";
+import styles from "./css/Header.module.css";
+>>>>>>> 1f7764110cb9a2fd5ed1bd561f2f4d261fd97a66:src/components/mypage/Header.jsx
 
 export default function Header() {
   return (

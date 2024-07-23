@@ -14,22 +14,10 @@
   display: flex;
 }
 
-.my_profile {
-  width: 300px;
-  height: 48px;
+.received_review {
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  background-image: url('/public/img/mypage/profile.png');
-  background-repeat: no-repeat;
-  background-position: 5px;
   font-size: 24px;
-  margin: 20px 0px;
-  padding-left: 60px;
-}
-
-.my_score {
-  color: red;
+  padding: 20px 0px;
 }
 
 .nav_container .nav_ul {
@@ -54,13 +42,6 @@
 .nav_container .nav_ul .nav_li .nav_item {
   color: black;
   text-decoration: none;
-}
-
-.my_product {
-  width: 700px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
 }
 
 .banner {
