@@ -31,32 +31,32 @@ const review = [
 
 export default function ReceivedReview() {
   return (
-    <div className={styles.header_container}>
+    <div className={styles.received_review_header_container}>
       <Header/>
-      <div className={styles.side_container}>
+      <div className={styles.received_review_side_container}>
         <SideBar/>
-        <div className={styles.main_container}>
-          <div className={styles.received_review}>받은 후기</div>
-          <div className={styles.nav_container}>
-            <ul className={styles.nav_ul}>
-              <li className={styles.nav_li}>
-                <Link to="/myStore" className={styles.nav_item}>상품</Link>
+        <div className={styles.received_review_main_container}>
+          <div className={styles.my_received_review}>받은 후기</div>
+          <div className={styles.received_review_nav_container}>
+            <ul className={styles.received_review_nav_ul}>
+              <li className={styles.received_review_nav_li}>
+                <Link to="/myStore" className={styles.received_review_nav_item}>상품</Link>
               </li>
-              <li className={styles.nav_li}>
-                <Link to="/receivedReview" className={styles.nav_item}>후기</Link>
+              <li className={styles.received_review_nav_li}>
+                <Link to="/receivedReview" className={styles.received_review_nav_item}>후기</Link>
               </li>
-              <li className={styles.nav_li}>
-                <Link to="/followList" className={styles.nav_item}>팔로우</Link>
+              <li className={styles.received_review_nav_li}>
+                <Link to="/followList" className={styles.received_review_nav_item}>팔로우</Link>
               </li>
             </ul>
           </div>
-          <div className={styles.my_received_review}>
+          <div className={styles.received_review_card}>
               {review.map((product, index) => (
                 <ReceivedReviewCard key={index} product={product}/>
               ))}
             </div>
         </div>
-        <div className={styles.banner}>배너</div>
+        <div className={styles.received_review_banner}>배너</div>
       </div>
       <Footer/>
     </div>

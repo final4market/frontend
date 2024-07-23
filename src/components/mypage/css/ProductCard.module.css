@@ -10,11 +10,11 @@
   height: auto;
 }
 
-.product_info {
+.product_card_info {
   font-size: 24px;
 }
 
 
-.product_detail {
+.product_card_detail {
   text-align: right;
 }

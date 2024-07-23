@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
-import ProductCard from "./ProductCard";
+import MyProductCard from "./ProductCard";
 import SideBar from "./SideBar";
 import styles from "./css/MyStore.module.css";
 
@@ -35,34 +35,34 @@ const product = [
 
 export default function MyStore() {
   return (
-    <div className={styles.header_container}>
+    <div className={styles.my_store_header_container}>
       <Header/>
-      <div className={styles.side_container}>
+      <div className={styles.my_store_side_container}>
         <SideBar/>
-          <div className={styles.main_container}>
-            <div className={styles.my_profile}>닉네임 | 평점:
-              <span className={styles.my_score}>★</span>4.5
+          <div className={styles.my_store_main_container}>
+            <div className={styles.my_store_profile}>닉네임 | 평점:
+              <span className={styles.my_store_score}>★</span>4.5
             </div>
-            <div className={styles.nav_container}>
-              <ul className={styles.nav_ul}>
-                <li className={styles.nav_li}>
-                  <Link to="/myStore" className={styles.nav_item}>상품</Link>
+            <div className={styles.my_store_nav_container}>
+              <ul className={styles.my_store_nav_ul}>
+                <li className={styles.my_store_nav_li}>
+                  <Link to="/myStore" className={styles.my_store_nav_item}>상품</Link>
                 </li>
-                <li className={styles.nav_li}>
-                  <Link to="/receivedReview" className={styles.nav_item}>후기</Link>
+                <li className={styles.my_store_nav_li}>
+                  <Link to="/receivedReview" className={styles.my_store_nav_item}>후기</Link>
                 </li>
-                <li className={styles.nav_li}>
-                  <Link to="/followList" className={styles.nav_item}>팔로우</Link>
+                <li className={styles.my_store_nav_li}>
+                  <Link to="/followList" className={styles.my_store_nav_item}>팔로우</Link>
                 </li>
               </ul>
             </div>
-            <div className={styles.my_product}>
+            <div className={styles.my_store_product}>
               {product.map((product, index) => (
-                <ProductCard key={index} product={product}/>
+                <MyProductCard key={index} product={product}/>
               ))}
             </div>
           </div>
-        <div className={styles.banner}>배너</div>
+        <div className={styles.my_store_banner}>배너</div>
       </div>
       <Footer/>
     </div>

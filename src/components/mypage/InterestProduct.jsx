@@ -33,19 +33,19 @@ const product = [
 
 export default function InterestProduct() {
   return (
-    <div className={styles.header_container}>
+    <div className={styles.interest_product_header_container}>
       <Header/>
-      <div className={styles.side_container}>
+      <div className={styles.interest_product_side_container}>
         <SideBar/>
-        <div className={styles.main_container}>
-          <div className={styles.interest_product}>관심 상품</div>
-          <div className={styles.my_product}>
+        <div className={styles.interest_product_main_container}>
+          <div className={styles.my_interest_product}>관심 상품</div>
+          <div className={styles.interest_product_card}>
             {product.map((product, index) => (
               <ProductCard key={index} product={product}/>
            ))}
           </div>
         </div>
-        <div className={styles.banner}>배너</div>
+        <div className={styles.interest_product_banner}>배너</div>
       </div>
       <Footer/>
     </div>
