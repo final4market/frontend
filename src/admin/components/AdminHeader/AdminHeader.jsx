@@ -18,7 +18,9 @@ const AdminHeader = () => {
       <div className={styles.adminHeader}>
         <div className={styles.adminHeaderTop}>
           <div className={styles.adminHeaderLeftSection}>
-            <span className={styles.adminHeaderLogo}>logo</span>
+            <div className={styles.adminHeaderLogo}>
+              <img src="/img/lm_symbol_only.png" alt="symbol" />
+            </div>
             <span>관리자</span>
           </div>
           <div className={styles.adminHeaderRightSection}>
