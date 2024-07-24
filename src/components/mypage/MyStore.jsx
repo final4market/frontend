@@ -2,36 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
-import MyProductCard from "./ProductCard";
 import SideBar from "./SideBar";
 import styles from "./css/MyStore.module.css";
-
-// const product = [
-//   {
-//     imageUrl: "/img/mypage/bag.png",
-//     name: "가죽 가방",
-//     price: "50,000원",
-//     detail: "관심 9 | 채팅 5"
-//   },
-//   {
-//     imageUrl: "/img/mypage/watch.png",
-//     name: "손목 시계",
-//     price: "300,000원",
-//     detail: "관심 5 | 채팅 9"
-//   },
-//   {
-//     imageUrl: "/img/mypage/sunglasses.png",
-//     name: "선글라스",
-//     price: "30,000원",
-//     detail: "관심 11 | 채팅 5"
-//   },
-//   {
-//     imageUrl: "/img/mypage/chair.png",
-//     name: "의자",
-//     price: "10,000원",
-//     detail: "관심 3 | 채팅 3"
-//   }
-// ];
 
 export default function MyStore() {
   const [profile, setProfile] = useState({});
@@ -40,12 +12,12 @@ export default function MyStore() {
   const productNo = 1;
 
   useEffect(() => {
-    fetchProfile(); // 프로필 정보 가져오기
+    fetchProfile();
     fetchProduct();
   }, []);
 
   const fetchProfile = () => {
-    fetch(`http://localhost:9999/myStoreProfile/${memberId}`) // memberId는 실제 사용할 멤버 ID로 대체해야 함
+    fetch(`http://localhost:9999/myStoreProfile/${memberId}`)
       .then((response) => response.json())
       .then((data) => setProfile(data))
       .catch((error) => console.error("Error fetching profile: ", error));

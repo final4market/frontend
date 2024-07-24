@@ -1,6 +1,5 @@
 import Footer from "./Footer";
 import Header from "./Header";
-import ProductCard from "./ProductCard";
 import SideBar from "./SideBar";
 import styles from "./css/InterestProduct.module.css";
 
@@ -40,9 +39,7 @@ export default function InterestProduct() {
         <div className={styles.interest_product_main_container}>
           <div className={styles.my_interest_product}>관심 상품</div>
           <div className={styles.interest_product_card}>
-            {product.map((product, index) => (
-              <ProductCard key={index} product={product}/>
-           ))}
+
           </div>
         </div>
         <div className={styles.interest_product_banner}>배너</div>
