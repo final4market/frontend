@@ -7,10 +7,10 @@ const MypageProductSoldoutList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const memberId = MypageMemberId(); // 커스텀 훅을 사용
 
-  const readData = async (id) => {
+  const readData = async (memberId) => {
     try {
-      const response = await axios.get(`http://localhost:9999/member/productSales/list/${id}`);
-      console.log(response.data); // 응답 데이터 구조 확인
+      const response = await axios.get(`http://localhost:9999/member/productsoldoutlist/list/${memberId}`);
+      console.log('Products:', response.data); // 응답 데이터 구조 확인
       setMemberProductList(response.data);
     } catch (error) {
       console.error('Error fetching member list:', error);

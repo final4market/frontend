@@ -10,6 +10,7 @@ import SubMain from './components/subPage/Sub_main';
 import ProtectedRoute from './admin/components/ProtectedRoute';
 import './services/AxiosSetup'; 
 import AdminMembers from './admin/components/adminMembers/AdminMembers';
+import MypageReviewList from './components/mypage/MypageReviewList';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/productRegister" element={<ProductRegistration/>} />
         <Route path="/sell-history" element={<MypageProductSalesList />} />
         <Route path="/buy-history" element={<MypageProductPurchaseHistory />} /> 
+        <Route path="/writed-review" element={<MypageReviewList/>} /> 
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<Navigate to="/admin/reports" />} />
           <Route path="/admin/members" element={<AdminMembers />} />

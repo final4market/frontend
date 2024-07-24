@@ -12,7 +12,7 @@ const MypageProductSalesList = () => {
 
   const readData = async (memberId) => {
     try {
-      const response = await axios.get(`http://localhost:9999/member/product/list/${memberId}`);
+      const response = await axios.get(`http://localhost:9999/member/productSaleslist/${memberId}`);
       console.log('Products:', response.data); // 응답 데이터 구조 확인
       setMemberProductList(response.data);
     } catch (error) {
@@ -42,7 +42,6 @@ const MypageProductSalesList = () => {
               <div className={styles.MypageProductSalesList}>
                 <img className={styles.ProductSalesimg} src={`http://localhost:9999/file?productNo=${memberProduct.productNo}&productImageNo=1`} alt="Product" />
                 <div className={styles.ProductSalestext}>
-                  <p className={styles.ProductSalesthDate}>구매확정일 : {memberProduct.thDate}</p>
                   <p className={styles.productTitle}>{memberProduct.productTitle}</p>
                   <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
                 </div>

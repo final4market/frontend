@@ -17,7 +17,7 @@
 }
 
 .reviewScore .on .star {
-  color: gold;
+  color: rgb(255, 38, 0);
 }
 
 .reviewScore .off .star {
@@ -27,12 +27,12 @@
 .submitButton {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #4CAF50;
+  background-color: #000000;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .submitButton:hover {
-  background-color: #45a049;
+  background-color: #888888;
 }

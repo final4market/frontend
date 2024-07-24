@@ -1,0 +1,68 @@
+.MypageProductSalesListComponent {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .MypageProductSalesList {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-bottom: 25px;
+  }
+  
+  .ProductSalesimg {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .ProductSalestext {
+    font-weight: bold;
+    width: 300px;
+  }
+  
+  .ProductSalesthDate {
+    font-size: 13px;
+    margin-top: 0px;
+    margin-left: 7px;
+  }
+  
+  .productPrice,
+  .productTitle {
+    font-size: 22px;
+    margin: 5px;
+    margin-left: 7px;
+    width: 350px;
+  }
+  
+  .reviewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .reviewScore {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .reviewScore .on {
+    color: rgb(255, 38, 0);
+  }
+  
+  .reviewScore .off {
+    color: lightgray;
+  }
+  
+  .submitButton {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .submitButton:hover {
+    background-color: #888888;
+  }
+  
