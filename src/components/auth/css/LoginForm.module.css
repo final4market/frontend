@@ -1,303 +1,132 @@
-.loginFormBox {
-  position: relative;
-  top: 0;
-  opacity: 1;
-  float: left;
-  padding: 60px 50px 40px 50px;
-  width: 100%;
-  background: #fff;
-  border-radius: 10px;
-  transform: scale(1);
-  z-index: 5;
-  transition: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+@import url('https://rsms.me/inter/inter-ui.css');
+::selection {
+  background: #2D2F36;
 }
-.loginFormBox.back {
-  transform: scale(0.95);
-  top: -20px;
-  opacity: 0.8;
-  z-index: -1;
+::-webkit-selection {
+  background: #2D2F36;
 }
-.loginFormBox::before {
-  content: "";
-  width: 100%;
-  height: 30px;
-  border-radius: 10px;
+::-moz-selection {
+  background: #2D2F36;
+}
+body {
+  background: white;
+  font-family: 'Inter UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+.loginFormPage {
+  background: #e2e2e5;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
   position: absolute;
-  top: -10px;
-  background: rgba(255, 255, 255, 0.6);
-  left: 0;
-  transform: scale(0.95);
-  z-index: -1;
+  place-content: center;
+  width: calc(100% - 40px);
 }
-
-.loginFormOverbox .loginFormTitle {
-  color: #fff;
+@media (max-width: 767px) {
+  .loginFormPage {
+    height: auto;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
 }
-.loginFormOverbox .loginFormTitle::before {
-  background: #fff;
+.loginFormContainer {
+  display: flex;
+  height: 320px;
+  margin: 0 auto;
+  width: 640px;
 }
-.loginFormTitle {
-  width: 100%;
-  float: left;
-  line-height: 46px;
-  font-size: 34px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #000000;
+@media (max-width: 767px) {
+  .loginFormContainer {
+    flex-direction: column;
+    height: 630px;
+    width: 320px;
+  }
+}
+.loginFormLeft {
+  background: white;
+  height: calc(100% - 40px);
+  top: 20px;
   position: relative;
+  width: 50%;
 }
-.loginFormTitle::before {
-  content: "";
-  width: 5px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: -50px;
+@media (max-width: 767px) {
+  .loginFormLeft {
+    height: 100%;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-height: 270px;
+  }
+}
+.loginFormLogin {
+  font-size: 50px;
+  font-weight: 900;
+  margin: 50px 40px 40px;
+}
+.loginFormErrormessages {
+  color: red;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 40px;
+}
+.loginFormRight {
   background: #000000;
+  box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
+  color: #F1F1F2;
+  position: relative;
+  width: 50%;
+}
+@media (max-width: 767px) {
+  .loginFormRight {
+    flex-shrink: 0;
+    height: 100%;
+    width: 100%;
+    max-height: 350px;
+  }
+}
+.loginFormRight svg {
+  position: absolute;
+  width: 320px;
+}
+.loginFormPath {
+  fill: none;
+  stroke: url(#linearGradient);;
+  stroke-width: 4;
+  stroke-dasharray: 240 1386;
 }
 .loginFormInput {
-  width: 100%;
-  float: left;
-  margin-top: 30px;
-  height: 70px;
-  position: relative;
-  transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.loginFormInput label,
-.loginFormInput input,
-.loginFormInput .loginFormSpin {
-  width: 100%;
-  float: left;
-  transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.loginFormInput input {
-  width: 100%;
-  height: 60px;
-  top: 10px;
-  border: none;
-  background: transparent;
-  font-family: 'Roboto', sans-serif;
-  font-size: 24px;
-  color: rgba(0, 0, 0, 0.8);
-  font-weight: 300;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 40px;
+  position: absolute;
 }
 .loginFormInput label {
-  font-family: 'Roboto', sans-serif;
-  font-size: 24px;
-  color: rgba(0, 0, 0, 0.8);
-  font-weight: 300;
-  position: absolute;
-  top: 10px;
-  left: 0;
-  z-index: 2;
-  cursor: pointer;
-  line-height: 60px;
-  transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.loginFormInput input:focus + label,
-.loginFormInput input:not(:placeholder-shown) + label {
-  top: 0;
-  font-size: 18px;
-  font-weight: 100;
-  line-height: 18px;
-}
-.loginFormInput::before,
-.loginFormInput .loginFormSpin {
-  width: 100%;
-  height: 1px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.loginFormInput::before {
-  content: "";
-  background: rgba(0, 0, 0, 0.1);
-  z-index: 3;
-}
-.loginFormInput .loginFormSpin {
-  background: #ed2553;
-  z-index: 4;
-  width: 0;
-}
-.loginFormInput input:focus + .loginFormSpin {
-  width: 100%;
-}
-.loginFormOverbox .loginFormInput .loginFormSpin {
-  background: rgba(255, 255, 255, 1);
-}
-.loginFormOverbox .loginFormInput::before {
-  background: rgba(255, 255, 255, 0.5);
-}
-.loginFormButton {
-  width: 100%;
-  float: left;
+  color:  #c2c2c5;
+  display: block;
+  font-size: 14px;
+  height: 16px;
   margin-top: 20px;
-  height: 70px;
-  position: relative;
-  transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 5px;
 }
-.loginFormButton button {
+.loginFormInput input {
+  background: transparent;
+  border: 0;
+  color: #f2f2f2;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
   width: 100%;
-  line-height: 64px;
-  left: 0%;
-  background-color: transparent;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  font-weight: 900;
-  font-size: 18px;
-  color: rgba(0, 0, 0, 0.2);
-  font-family: 'Roboto', sans-serif;
-  position: relative;
-  z-index: 2;
-  cursor: pointer;
 }
-.loginFormButton.loginFormLogin {
-  width: 60%;
-  left: 20%;
-  margin-top: 30px;
+.loginFormInput input::-moz-focus-inner { 
+  border: 0; 
 }
-.loginFormButton.loginFormLogin button {
-  background-color: #fff;
-  color: #000000;
-  border: none;
+.loginFormInput #submit {
+  color: #707075;
+  margin-top: 40px;
+  transition: color 300ms;
 }
-.loginFormButton.loginFormLogin button.active {
-  border: 3px solid transparent;
-  color: #fff !important;
+.loginFormInput #submit:focus {
+  color: #f2f2f2;
 }
-.loginFormButton.loginFormLogin button.active span {
-  opacity: 0;
-  transform: scale(0);
-}
-.loginFormButton.loginFormLogin button.active i.fa {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-.loginFormButton.loginFormLogin button i.fa {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  line-height: 60px;
-  transform: scale(0) rotate(-45deg);
-}
-.loginFormButton.loginFormLogin button:hover {
-  color: #d32f2f;
-  border-color: #d32f2f;
-}
-.loginFormPassForgot {
-  width: 100%;
-  float: left;
-  text-align: center;
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 18px;
-}
-.loginFormClickEffect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #ed2553;
-  border-radius: 50%;
-}
-.loginFormOverbox {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: inherit;
-  border-radius: 10px;
-  padding: 60px 50px 40px 50px;
-}
-.loginFormOverbox .loginFormTitle,
-.loginFormOverbox .loginFormButton,
-.loginFormOverbox .loginFormInput {
-  z-index: 111;
-  position: relative;
-  color: #fff !important;
-  display: none;
-}
-.loginFormOverbox .loginFormInput {
-  margin-top: 20px;
-}
-.loginFormOverbox .loginFormInput input,
-.loginFormOverbox .loginFormInput label {
-  color: #fff;
-}
-.loginFormMaterialButton,
-.loginFormAlt2 {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: #000000;
-  position: absolute;
-  top: 40px;
-  right: -70px;
-  cursor: pointer;
-  z-index: 100;
-  transform: translate(0%, 0%);
-}
-.loginFormMaterialButton .loginFormShape,
-.loginFormAlt2 .loginFormShape {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-}
-.loginFormMaterialButton .loginFormShape::before,
-.loginFormAlt2 .loginFormShape::before,
-.loginFormMaterialButton .loginFormShape::after,
-.loginFormAlt2 .loginFormShape::after {
-  content: "";
-  background: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(360deg);
-}
-.loginFormMaterialButton .loginFormShape::before,
-.loginFormAlt2 .loginFormShape::before {
-  width: 25px;
-  height: 4px;
-}
-.loginFormMaterialButton .loginFormShape::after,
-.loginFormAlt2 .loginFormShape::after {
-  height: 25px;
-  width: 4px;
-}
-.loginFormMaterialButton.active,
-.loginFormAlt2.active {
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%) rotate(0deg);
-}
-.loginFormMaterialButton.active .loginFormShape,
-.loginFormAlt2.active .loginFormShape {
-  width: 50%;
-  height: 50%;
-  transform: rotate(45deg);
-}
-.loginForm {
-  font-family: 'Roboto', sans-serif;
-  overflow: hidden;
-}
-.loginForm .html {
-  overflow: hidden;
-}
-.loginFormMaterialContainer {
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.loginForm * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  list-style-type: none;
-  outline: none;
+.loginFormInput #submit:active {
+  color: #d0d0d2;
 }
