@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import InputMask from 'react-input-mask';
+import React, { useState, useEffect } from 'react';
+import InputMask from 'react-input-mask';
 import Payment from './Sub_payment';
 import Backdrop from './Sub_overlay';
 import styles from './css/Sub_purchase_side.module.css';

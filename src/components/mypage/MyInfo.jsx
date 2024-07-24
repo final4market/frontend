@@ -1,10 +1,75 @@
-import Header from "./Header";
+import { useState } from "react";
+import Footer from "./Footer";
+import Header from "../header/Header";
+import SideBar from "./SideBar";
+import styles from "./css/MyInfo.module.css";
+
 
 export default function MyInfo() {
+  const [emailOption, setEmailOption] = useState('');
+
+  const EmailOptionChange = (e) => {
+    setEmailOption(e.target.value);
+  };
+
   return (
-    <div className={styles.container}>
-      <Header/>
-      
+    <div className={styles.header_container}>
+      <Header />
+      <div className={styles.side_container}>
+        <SideBar />
+        <div className={styles.info_container}>
+          <div className={styles.my_info}>내 정보</div>
+          <div className={styles.main_container}>
+            <div className={styles.info_content}>프로필</div>
+            <div className={styles.my_profile_image}>
+              <div className={styles.profile_guide}><span className={styles.asterisk}>*</span>원하는 프로필 사진을 등록하세요.</div>
+              <button className={styles.register_button}>등록</button>
+              <button className={styles.delete_button}>삭제</button>
+            </div>
+            <div className={styles.info_content}>아이디<br />
+              <input className={styles.info_item} type="text" name="id" value="아이디" readOnly />
+            </div>
+            <div className={styles.info_content}>암호<br />
+              <input className={styles.info_item} type="password" name="pw" placeholder="암호를 입력하세요." required />
+            </div>
+            <div className={styles.info_content}>암호 확인<br />
+              <input className={styles.info_item} type="password" name="pw_check" placeholder="암호를 다시 입력하세요." required />
+            </div>
+            <div className={styles.info_content}>이름<br />
+              <input className={styles.info_item} type="text" name="name" placeholder="이름" readOnly />
+            </div>
+            <div className={styles.info_content}>닉네임<br />
+              <input className={styles.info_item} type="text" name="nick" placeholder="닉네임" required />
+            </div>
+            <div className={styles.info_content}>이메일<br />
+              <input className={styles.email_item} type="text" name="email" defaultValue="user" required />@
+              {emailOption === "직접입력" ? (
+                <input className={styles.email_item} type="text" name="email_direct" placeholder="직접입력" required />
+              ) : (
+                <input className={styles.email_item} type="text" name="email_domain" value={emailOption} readOnly />
+              )}
+              <select className={styles.select_email} onChange={EmailOptionChange}>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="nate.com">nate.com</option>
+                <option value="직접입력">직접입력</option>
+              </select>
+            </div>
+            <div className={styles.info_content}>주소<br />
+              <input className={styles.info_item} type="text" name="address" placeholder="주소" required />
+            </div>
+            <div className={styles.button_container}>
+              <button className={styles.update_button}>수정하기</button>
+            </div>
+            <div className={styles.button_container}>
+              <button className={styles.withdrawal_button}>회원탈퇴</button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.banner}>배너</div>
+      </div>
+      <Footer />
     </div>
   );
 };
