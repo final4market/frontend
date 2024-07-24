@@ -20,12 +20,13 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  background-image: url('/public/img/mypage/profile.png');
-  background-repeat: no-repeat;
-  background-position: 5px;
-  padding-left: 60px;
   margin: 20px 0px;
   font-size: 24px;
+}
+
+.my_store_profile_image {
+  width: 48px;
+  height: 48px;
 }
 
 .my_store_score {
@@ -57,10 +58,18 @@
 }
 
 .my_store_product {
-  width: 700px;
+  width: 300px;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+  flex-flow: column wrap;
+  border: 1px solid #CCCCCC;
+  margin: 10px;
+  padding: 10px;
+  font-size: 24px;
+}
+
+.my_store_product_image {
+  width: 300px;
+  height: 200px;
 }
 
 .my_store_banner {
