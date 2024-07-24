@@ -1,7 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import AdminMembers from './admin/components/adminMembers/AdminMembers';
 import AdminReports from './admin/components/adminReports/AdminReports';
 import LoginForm from './components/auth/LoginForm';
 import ProductRegistration from './components/productRegistration/ProductRegistration';
@@ -10,6 +9,8 @@ import MypageProductPurchaseHistory from './components/mypage/MypageProductPurch
 import SubMain from './components/subPage/Sub_main';
 import ProtectedRoute from './admin/components/ProtectedRoute';
 import './services/AxiosSetup'; 
+import AdminMembers from './admin/components/adminMembers/AdminMembers';
+
 
 function App() {
   return (

@@ -3,13 +3,15 @@ import MypageSideBar from './MypageSideBar';
 import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
 import MypagReviewWrite from './MypagReviewWrite';
+import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
 
 const MypageProductPurchaseHistory = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const [showReviewForm, setShowReviewForm] = useState({}); // 리뷰 작성 폼 상태
-  const buyerId = 'member5';
+  const buyerId = MypageMemberId(); // 커스텀 훅을 사용
 
   const readData = async () => {
+    if (!buyerId) return; // buyerId가 유효하지 않은 경우 종료
     try {
       const response = await axios.get(`http://localhost:9999/member/ProductPurchaseHistory/${buyerId}`);
       console.log(response.data); // 응답 데이터 구조 확인
@@ -21,7 +23,7 @@ const MypageProductPurchaseHistory = () => {
 
   useEffect(() => {
     readData();
-  }, []);
+  }, [buyerId]); // buyerId 변경 시 데이터 새로 읽어오기
 
   // 숫자를 천 단위로 구분하여 포맷팅하는 함수
   const formatPrice = (price) => {
@@ -76,7 +78,7 @@ const MypageProductPurchaseHistory = () => {
           {reviewWritable.map((memberProduct, index) => (
             <div key={index}>
               <div className={styles.MypageProductSalesList}>
-                <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
+                <img className={styles.ProductSalesimg} src={`http://localhost:9999/file?productNo=${memberProduct.productNo}&productImageNo=1`} alt="Product" />
                 <div className={styles.ProductSalestext}>
                   <p className={styles.ProductSalesthDate}>구매확정일 : {memberProduct.thDate}</p>
                   <p className={styles.productTitle}>{memberProduct.productTitle}</p>

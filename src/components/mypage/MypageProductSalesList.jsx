@@ -3,14 +3,14 @@ import MypageSideBar from './MypageSideBar';
 import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
 import MypageProductSoldoutList from './MypageProductSoldoutList';
+import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
 
 const MypageProductSalesList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
-  const [memberProductImageList, setMemberProductImageList] = useState([]);
 
-  const memberId = 'member4';
+  const memberId = MypageMemberId(); // 커스텀 훅을 사용
 
-  const readData = async () => {
+  const readData = async (memberId) => {
     try {
       const response = await axios.get(`http://localhost:9999/member/product/list/${memberId}`);
       console.log('Products:', response.data); // 응답 데이터 구조 확인
@@ -20,41 +20,16 @@ const MypageProductSalesList = () => {
     }
   };
 
-  const readImageData = async () => {
-    try {
-      const response = await axios.get(`http://localhost:9999/file?productNo=73&productImageNo=1`);
-      console.log('Product Images:', response.data); // 응답 데이터 구조 확인
-      setMemberProductImageList(response.data);
-    } catch (error) {
-      console.error('Error fetching member product images:', error);
-    }
-  };
-
   useEffect(() => {
-    readData();
-    readImageData();
-  }, []);
+    if (memberId) {
+      readData(memberId);
+    }
+  }, [memberId]);
 
-  // 숫자를 천 단위로 구분하여 포맷팅하는 함수
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ko-KR').format(price); // 한국 원화 형식
   };
 
-  // 제품과 이미지를 병합하여 리스트로 반환
-  const mergedList = [];
-  let productIndex = 0;
-  let imageIndex = 0;
-
-  while (productIndex < memberProductList.length || imageIndex < memberProductImageList.length) {
-    if (productIndex < memberProductList.length) {
-      mergedList.push({ type: 'product', data: memberProductList[productIndex] });
-      productIndex++;
-    }
-    if (imageIndex < memberProductImageList.length) {
-      mergedList.push({ type: 'image', data: memberProductImageList[imageIndex] });
-      imageIndex++;
-    }
-  }
 
   return (
     <div>
@@ -62,20 +37,21 @@ const MypageProductSalesList = () => {
         <MypageSideBar />
         <div>
           <h3>판매중 ({memberProductList.length})</h3>
-          {mergedList.map((item, index) => (
-            <div key={index} className={styles.MypageProductSalesList}>
-              {item.type === 'product' ? (
+          {memberProductList.map((memberProduct, index) => (
+            <div key={index}>
+              <div className={styles.MypageProductSalesList}>
+                <img className={styles.ProductSalesimg} src={`http://localhost:9999/file?productNo=${memberProduct.productNo}&productImageNo=1`} alt="Product" />
                 <div className={styles.ProductSalestext}>
-                  <p className={styles.productTitle}>{item.data.productTitle}</p>
-                  <p className={styles.productPrice}>￦{formatPrice(item.data.productPrice)}</p>
+                  <p className={styles.ProductSalesthDate}>구매확정일 : {memberProduct.thDate}</p>
+                  <p className={styles.productTitle}>{memberProduct.productTitle}</p>
+                  <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
                 </div>
-              ) : (
-                <img className={styles.ProductSalesimg} src={item.data.image} alt="Product" />
-              )}
+              </div>
             </div>
           ))}
+      
           <MypageProductSoldoutList />
-          <img src='http://localhost:9999/file?productNo=73&productImageNo=1'/>
+      
         </div>
       </div>
     </div>

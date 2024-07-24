@@ -6,6 +6,7 @@ import ProductImageUpload from './ProductImageUpload';
 import ProductDeliveryOptions from './ProductDeliveryOptions';
 import ProductTradeArea from './ProductTradeArea';
 import CategorySelector from './CategorySelector';
+import ProductMemberId from './ProductMemberId'; // 커스텀 훅을 import
 
 export default function ProductRegistration() {
     const productTitle = useRef();
@@ -13,6 +14,7 @@ export default function ProductRegistration() {
     const productPrice = useRef();
     const deliveryCharge = useRef();
     const [ProductCategoryList, setProductCategoryList] = useState([]);
+    const memberId = ProductMemberId(); // 커스텀 훅을 사용
     const [formData, setFormData] = useState({
         productTitle: '',
         productPrice: '',
@@ -21,7 +23,7 @@ export default function ProductRegistration() {
         tradeArea: '',
         directDeal: 'select',
         deliveryCharge: '',
-        categoryNo: '' // Add categoryNo to formData
+        categoryNo: '' // Add categoryNo to formDat
     });
 
     const [parentNumberOptions, setParentNumberOptions] = useState([]);
@@ -148,6 +150,7 @@ export default function ProductRegistration() {
         formDataToSend.append('deliveryNo', formData.deliveryNo);
         formDataToSend.append('tradeArea', formData.tradeArea);
         formDataToSend.append('deliveryCharge', formData.deliveryCharge);
+        formDataToSend.append('memberId', memberId);
 
         const fileInputs = document.querySelectorAll('input[type="file"]');
         fileInputs.forEach((fileInput) => {
