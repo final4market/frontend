@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import axios from 'axios';
 
 export const AuthContext = createContext();
 
@@ -33,7 +32,7 @@ export const AuthProvider = ({ children }) => {
             console.log('Token is valid');
             setIsAuthenticated(true);
             setProfile(decodedToken);
-            setRoles([decodedToken.role]);
+            setRoles(decodedToken.role); // Expecting role to be an array
           }
         } catch (error) {
           console.error('Failed to decode token:', error.message);
@@ -107,7 +106,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, profile, setProfile, handleOAuthCallback }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, profile, setProfile, roles, setRoles, handleOAuthCallback, handleLogout }}>
       {!loading ? children : <div>로딩 중</div>}
     </AuthContext.Provider>
   );

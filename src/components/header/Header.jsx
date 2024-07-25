@@ -1,14 +1,10 @@
-import React, { useRef, useState, useContext, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './css/Header.module.css';
-import Backdrop from '../subPage/Sub_overlay';
-import { AuthContext } from '../../services/AuthContext';
+import Chat from './Header_ChatList';
 
 export default function Header() {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const chatArea = useRef();
-  const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const chatWidth = () => {
     setIsChatOpen(true);
@@ -18,29 +14,12 @@ export default function Header() {
     setIsChatOpen(false);
   };
 
-  useEffect(() => {
-    console.log('Header isAuthenticated', isAuthenticated);
-  }, [isAuthenticated]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('tokenProvider');
-    setIsAuthenticated(false);
-    navigate('/');
-  };
-
   return (
     <>
       <div className={styles.header_container}>
         <div className={styles.header}>
           <div className={styles.link_container}>
-            {isAuthenticated ? (
-              <Link to="/" onClick={handleLogout} className={styles.logoutButton}>
-                로그아웃
-              </Link>
-            ) : (
-              <Link to="/login">로그인/회원가입</Link>
-            )}
+            <Link to="#">로그인/회원가입</Link>
             <Link to="#">내상점</Link>
           </div>
           <div className={styles.search_container}>
@@ -153,17 +132,11 @@ export default function Header() {
             </ul>
           </nav>
         </div>
-        <Backdrop
-          show={isChatOpen}
-          onClick={closeChat}
-          excludeClasses={['side']} // 사이드 바를 제외하고 클릭을 감지
-        />
-        <div className={`${styles.side} ${!isChatOpen ? styles.hidden : ''}`} ref={chatArea}>
-          <span onClick={closeChat}><img src='/img/x.png' alt='close' className={styles.x} /></span>
-          {/* <a href='#'>하이</a> */}
-        </div>
+        <Chat isChatOpen={isChatOpen} onClose={closeChat}/>
       </div>
-      <hr />
+      <div className={styles.header_hr}>
+        <hr />
+      </div>
     </>
   );
 }
