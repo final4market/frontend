@@ -4,16 +4,11 @@ import axios from 'axios';
 import styles from './css/MypageReviewList.module.css';
 import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
 
-const token = localStorage.getItem('token');
-console.error('Token:', token);
-
-  console.error(token);
- 
 const MypageReviewList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const [reviewList, setReviewList] = useState({}); // 리뷰 목록을 객체로 변경
   const [editReviewState, setEditReviewState] = useState({}); // 수정 상태를 객체로 변경
-  const [tempReviewData, setTempReviewData] = useState({}); // 임시 리뷰 데이터
+  const [tempReviewData, setTempReviewData] = useState({});
 
   const memberId = MypageMemberId(); // 커스텀 훅을 사용
 
@@ -39,17 +34,14 @@ const MypageReviewList = () => {
 
   const reviewDelete = async (productNo) => {
     try {
-      // productNo만 사용하여 리뷰 삭제 요청
-      await axios.delete(`http://localhost:9999/review/delete/${productNo}`,{
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-    });
+      await axios.delete(`http://localhost:9999/review/delete/${productNo}`);
       // 리뷰 삭제 후 상태에서 해당 리뷰 제거
       setReviewList(prevState => ({
         ...prevState,
         [productNo]: []
       }));
+      alert("삭제가 완료됐습니다."); // alert 창으로 메시지 표시
+      window.location.reload(); // 페이지 새로고침
     } catch (error) {
       console.error('Error deleting reviews:', error);
     }
@@ -83,27 +75,32 @@ const MypageReviewList = () => {
     }));
   };
 
-  const saveReview = async (productNo, reviewId) => {
-    const updatedReview = tempReviewData[productNo];
-    try {
-      await axios.put(`http://localhost:9999/review/${reviewId}`, updatedReview);
-      // 저장 후 수정 상태를 false로 변경
-      setEditReviewState(prevState => ({
-        ...prevState,
-        [productNo]: false
-      }));
-      // 실제 리뷰 데이터 업데이트
-      setReviewList(prevState => ({
-        ...prevState,
-        [productNo]: prevState[productNo].map(review =>
-          review.reviewId === reviewId ? { ...review, ...updatedReview } : review
-        )
-      }));
-    } catch (error) {
-      console.error('Error updating review:', error);
-    }
-  };
-
+    
+      const saveReview = async (productNo, reviewId) => {
+        const updatedReview = tempReviewData[productNo];
+        console.log(updatedReview);
+        try {
+          await axios.put(`http://localhost:9999/review/update/${productNo}`, updatedReview);
+          // 저장 후 수정 상태를 false로 변경
+          setEditReviewState(prevState => ({
+            ...prevState,
+            [productNo]: false
+          }));
+          // 실제 리뷰 데이터 업데이트
+          setReviewList(prevState => ({
+            ...prevState,
+            [productNo]: prevState[productNo].map(review =>
+              review.reviewId === reviewId ? { ...review, ...updatedReview } : review
+            )
+          }));
+          alert("수정이 완료됐습니다."); // alert 창으로 메시지 표시
+          window.location.reload(); // 페이지 새로고침
+        } catch (error) {
+          console.error('Error updating review:', error);
+        }
+      };
+  
+   
   useEffect(() => {
     if (memberId) {
       readData(memberId);
