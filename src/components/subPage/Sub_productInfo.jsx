@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PurchaseSide from './Sub_side';
 import styles from './css/sub_productInfo.module.css';
-import Backdrop from './Sub_overlay';
 import Report from './sub_report';
+import Sub_chat from './Sub_chat';
 
 const ProductInfo = ({ productImage }) => {
   const [timePassed, setTimePassed] = useState("");
@@ -28,17 +28,25 @@ const ProductInfo = ({ productImage }) => {
   const [categoryInfo, setCategoryInfo] = useState([]);
   const [isPurchaseOpen, setIsPurchaseOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatInfo, setChatInfo] = useState(false);
 
   const fetchData = async () => {
     try {
-      const productResponse = await axios.get('http://localhost:9999/productInfo?productNo=20');
+      const productResponse = await axios.get('http://localhost:9999/api/product/productInfo?productNo=20');
       setProductInfo(productResponse.data);
+      // console.log(productResponse.data);
 
-      const deliveryResponse = await axios.get('http://localhost:9999/deliveryInfo?productNo=20');
+      const deliveryResponse = await axios.get('http://localhost:9999/api/product/deliveryInfo?productNo=20');
       setDeliveryInfo(deliveryResponse.data);
 
-      const categoryResponse = await axios.get(`http://localhost:9999/categoryInfo?categoryNo=${productResponse.data.categoryNo}`);
+      const categoryResponse = await axios.get(`http://localhost:9999/api/product/categoryInfo?categoryNo=${productResponse.data.categoryNo}`);
       setCategoryInfo(categoryResponse.data);
+
+      const likeStatusResponse = await axios.get('http://localhost:9999/selectLikeStatus?productNo=20');
+      // console.log(likeStatusResponse.data);
+      const userLiked = likeStatusResponse.data.includes('member4');
+      setIsLiked(userLiked);
     } catch (error) {
       console.error(error);
     }
@@ -72,14 +80,14 @@ const ProductInfo = ({ productImage }) => {
     updateTimePassed();
   }, [productInfo]);
 
-  const likeClick = async () => {
+   const likeClick = async () => {
     setIsLiked((prevIsLiked) => !prevIsLiked);
     try {
       const response = await axios.get('http://localhost:9999/insertProductLike?memberId=member4&productNo=20');
       console.log(response);
       alert(response.data.msg);
     } catch (error) {
-      console.error('Error occurred:', error);
+      console.error('Error occurred:', error); 
     }
   };
 
@@ -90,6 +98,17 @@ const ProductInfo = ({ productImage }) => {
   const reportOpen = () => {
     setIsReportOpen(true);
   };
+
+  const chatOpen = async () => { 
+      try {
+        const responseChatInfo = await axios.get('http://localhost:9999/selectChatInfo?memberId=member4');
+        console.log(responseChatInfo.data);
+        setChatInfo(responseChatInfo.data)
+      } catch (error) {
+        console.error(error);
+      }
+    setIsChatOpen(true);
+  }
 
   return (
     <>
@@ -105,20 +124,20 @@ const ProductInfo = ({ productImage }) => {
         <p className={styles.product_price}>{productInfo.productPrice.toLocaleString()}원</p>
         <div className={styles.product_sub_information}>
           <div className={styles.product_create}>
-            <img src="/img/time.png" alt="time" className={styles.information_img} />
+            <img src="/img/time.png" alt="time" className={styles.information_img}/>
             <span>{timePassed}</span>
           </div>
           <div className={styles.product_count}>
-            <img src="/img/find.png" alt="find" className={styles.information_img} />
+            <img src="/img/find.png" alt="find" className={styles.information_img}/>
             <span>{productInfo.productCount}</span>
           </div>
           <div className={styles.product_like}>
-            <img src={isLiked ? "/img/redheart.png" : "/img/heart.png"} alt="like" onClick={likeClick} className={styles.information_img} />
+            <img src={isLiked ? "/img/redheart.png" : "/img/heart.png"} alt="like" onClick={likeClick} className={styles.information_img}/>
             <span>{productInfo.productLike}</span>
           </div>
           <div className={styles.product_report}>
             <a href="#" onClick={reportOpen}>
-              <img src="/img/report.png" alt="report" className={styles.information_img} />신고하기
+              <img src="/img/report.png" alt="report" className={styles.information_img}/>신고하기
             </a>
           </div>
           <Report isReportOpen={isReportOpen} onClose={() => setIsReportOpen(false)} />
@@ -146,7 +165,7 @@ const ProductInfo = ({ productImage }) => {
           <button className={styles.like_btn} onClick={likeClick}>
             <img src={isLiked ? "/img/redheart.png" : "/img/heart.png"} alt="like" />
           </button>
-          <button className={styles.chat_btn}>채팅하기</button>
+          <button className={styles.chat_btn} onClick={chatOpen}>채팅하기</button>
           <button className={styles.buy_btn} onClick={buyWidth}>구매하기</button>
         </div>
       </div>
@@ -157,7 +176,8 @@ const ProductInfo = ({ productImage }) => {
           <p>{productInfo.productContent}</p>
         </div>
       </div>
-      <PurchaseSide isOpen={isPurchaseOpen} onClose={() => setIsPurchaseOpen(false)} productImage={productImage} productInfo={productInfo} />
+      <PurchaseSide isOpen={isPurchaseOpen} onClose={() => setIsPurchaseOpen(false)} productImage={productImage} productInfo={productInfo}/>
+      <Sub_chat isChatOpen={isChatOpen} onClose={() => setIsChatOpen(false)} productImage={productImage} productInfo={productInfo} memberId='member4' chatInfo={chatInfo}/>
     </>
   );
 };
