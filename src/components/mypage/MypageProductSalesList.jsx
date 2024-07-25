@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
 import MypageProductSoldoutList from './MypageProductSoldoutList';
 import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
+import ProductRegisterUpdate from '../productRegistration/ProductRegistrationUpdate';
 
 const MypageProductSalesList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
@@ -20,6 +21,19 @@ const MypageProductSalesList = () => {
     }
   };
 
+  const productDelete =async(productNo)=>{
+    try {
+      await axios.delete(`http://localhost:9999/product/delete/${productNo}`)
+      alert("삭제가 완료됐습니다."); // alert 창으로 메시지 표시
+      window.location.reload(); // 페이지 새로고침
+    }catch(error){
+
+    }
+  }
+
+  const productUpdate=()=>{
+   
+  }
   useEffect(() => {
     if (memberId) {
       readData(memberId);
@@ -45,7 +59,10 @@ const MypageProductSalesList = () => {
                   <p className={styles.productTitle}>{memberProduct.productTitle}</p>
                   <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
                 </div>
+                <button onClick={()=> productUpdate(memberProduct.productNo)}>수정</button>
+                <button onClick={() => productDelete(memberProduct.productNo) }>삭제</button>
               </div>
+            
             </div>
           ))}
       
