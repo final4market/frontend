@@ -12,51 +12,6 @@ const RegisterForm = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    $(".loginFormInput input").focus(function () {
-      $(this).parent(".loginFormInput").each(function () {
-        $("label", this).css({
-          "line-height": "18px",
-          "font-size": "18px",
-          "font-weight": "100",
-          "top": "0px"
-        });
-        $(".loginFormSpin", this).css({
-          "width": "100%"
-        });
-      });
-    }).blur(function () {
-      $(".spin").css({
-        "width": "0px"
-      });
-      if ($(this).val() === "") {
-        $(this).parent(".loginFormInput").each(function () {
-          $("label", this).css({
-            "line-height": "60px",
-            "font-size": "24px",
-            "font-weight": "300",
-            "top": "10px"
-          });
-        });
-      }
-    });
-
-    $(".loginFormButton").click(function (e) {
-      const pX = e.pageX;
-      const pY = e.pageY;
-      const oX = parseInt($(this).offset().left);
-      const oY = parseInt($(this).offset().top);
-
-      $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>');
-      $('.x-' + oX + '.y-' + oY + '').animate({
-        "width": "500px",
-        "height": "500px",
-        "top": "-250px",
-        "left": "-250px",
-      }, 600);
-      $("button", this).addClass('active');
-    });
-  }, []);
 
   const handleSSN1Change = (e) => {
     const value = e.target.value;
