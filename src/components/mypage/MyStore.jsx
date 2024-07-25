@@ -1,59 +1,76 @@
-import React from 'react';
-import Header from './MypageHeader';
-import SideBar from './SideBar';
-import ProductCard from './ProductCard';
-import Footer from './Footer';
-import styles from './css/MyStore.module.css';
-
-const products = [
-  {
-    name: "가죽 가방",
-    price: "50,000원",
-    detail: "관심 9 | 채팅 5",
-    imageUrl: "/img/mypage/bag.png",
-  },
-  {
-    name: "손목 시계",
-    price: "300,000원",
-    detail: "관심 5 | 채팅 9",
-    imageUrl: "/img/mypage/watch.png",
-  },
-  {
-    name: "선글라스",
-    price: "30,000원",
-    detail: "관심 11 | 채팅 5",
-    imageUrl: "/img/mypage/sunglasses.png",
-  },
-  {
-    name: "의자",
-    price: "10,000원",
-    detail: "관심 3 | 채팅 3",
-    imageUrl: "/img/mypage/chair.png",
-  },
-];
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Footer from "./Footer";
+import Header from "../header/Header";
+import SideBar from "./SideBar";
+import styles from "./css/MyStore.module.css";
 
 export default function MyStore() {
+  const [profile, setProfile] = useState({});
+  const [product, setProduct] = useState([]);
+  const memberId = 'member4';
+  const productNo = 1;
+
+  useEffect(() => {
+    fetchProfile();
+    fetchProduct();
+  }, []);
+
+  const fetchProfile = () => {
+    fetch(`http://localhost:9999/myPageProfile/${memberId}`)
+      .then((response) => response.json())
+      .then((data) => setProfile(data))
+      .catch((error) => console.error("Error fetching profile: ", error));
+  };
+
+  const fetchProduct = () => {
+    fetch(`http://localhost:9999/myPageProduct/${productNo}`)
+      .then((response) => response.json())
+      .then((data) => setProduct(data))
+      .catch((error) => console.error("Error fetching product: ", error));
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.my_store_header_container}>
       <Header/>
-      <div className={styles.content}>
+      <div className={styles.my_store_side_container}>
         <SideBar/>
-          <main>
-            <div className={styles.profile}>닉네임 | 평점: <span className={styles.score}>★</span>4.5</div>
-            <nav>
-              <ul>
-                <li><a href="#" className={styles.product}>상품</a></li>
-                <li><a href="#" className={styles.review}>후기</a></li>
-                <li><a href="#" className={styles.follow}>팔로우</a></li>
-              </ul>
-           </nav>
-            <div className={styles.products}>
-              {products.map((product, index) => (
-                <ProductCard key={index} product={product}/>
-              ))}
+          <div className={styles.my_store_main_container}>
+            <div className={styles.my_store_profile}>
+              <img className={styles.my_store_profile_image} src={profile.memberProfilePath} alt="profileImage"/>
+              {profile.memberNick} | 평점:
+              <span className={styles.my_store_score}>★</span>
+              {profile.memberScore}
             </div>
-          </main>
-        <div className={styles.banner}>배너</div>
+            <div className={styles.my_store_nav_container}>
+              <ul className={styles.my_store_nav_ul}>
+                <li className={styles.my_store_nav_li}>
+                  <Link to="/myStore" className={styles.my_store_nav_item}>상품</Link>
+                </li>
+                <li className={styles.my_store_nav_li}>
+                  <Link to="/receivedReview" className={styles.my_store_nav_item}>후기</Link>
+                </li>
+                <li className={styles.my_store_nav_li}>
+                  <Link to="/followList" className={styles.my_store_nav_item}>팔로우</Link>
+                </li>
+              </ul>
+            </div>
+            <div className={styles.my_store_product}>
+              <img className={styles.my_store_product_image} src={product.productImagePath} alt="productIamge"/>
+              <div className={styles.my_store_product_title}>
+                <h4>{product.productTitle}</h4>
+              </div>
+              <div className={styles.my_store_product_price}>
+                {product.productPrice}원
+              </div>
+              <div className={styles.my_store_product_detail}>
+                관심{product.interestCount}
+                <div className={styles.my_store_vertical_bar}>|</div>
+                채팅{product.chatCount}
+              </div>
+            </div>
+          </div>
+        <div className={styles.my_store_banner}>배너</div>
       </div>
       <Footer/>
     </div>

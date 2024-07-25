@@ -4,7 +4,7 @@ import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
 import MypageProductSoldoutList from './MypageProductSoldoutList';
 import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
-import ProductRegisterUpdate from '../productRegistration/ProductRegistrationUpdate';
+
 
 const MypageProductSalesList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
@@ -54,7 +54,7 @@ const MypageProductSalesList = () => {
           {memberProductList.map((memberProduct, index) => (
             <div key={index}>
               <div className={styles.MypageProductSalesList}>
-                <img className={styles.ProductSalesimg} src={`http://localhost:9999/file?productNo=${memberProduct.productNo}&productImageNo=1`} alt="Product" />
+                <img className={styles.ProductSalesimg} src={`http://localhost:9999/file?productNo=${memberProduct.productNo}&productImageNo=0`} alt="Product" />
                 <div className={styles.ProductSalestext}>
                   <p className={styles.productTitle}>{memberProduct.productTitle}</p>
                   <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
