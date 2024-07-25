@@ -14,7 +14,7 @@ function SubAddress({ setAddressMainInfo, resetAddress }) {
 
 
   const handleComplete = (data) => {
-
+  
     const fullAddress = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
     const address = {
       fullAddress,
@@ -26,16 +26,15 @@ function SubAddress({ setAddressMainInfo, resetAddress }) {
     setShowPostcode(false);
   };
 
-  // Toggle sidebar class
   const sidebarClass = showPostcode ? `${styles.postcode_side} ${styles.open}` : styles.postcode_side;
 
   const postcodeStyle = {
     width: '100%',
     height: '100%',
-    marginTop: '70px',
-    borderTop: '1px solid black',
+    marginTop : '70px',
+    borderTop : '1px solid black',
   };
-
+  
   return (
     <div>
       <div className={styles.address_container}>
@@ -51,9 +50,9 @@ function SubAddress({ setAddressMainInfo, resetAddress }) {
       {showPostcode && (
         <div className={sidebarClass}>
           <Postcode
-            onComplete={handleComplete}
-            autoClose={false}
-            style={postcodeStyle}
+          onComplete={handleComplete}
+          autoClose={false}
+          style={postcodeStyle}
           />
           <button
             onClick={() => setShowPostcode(false)}
