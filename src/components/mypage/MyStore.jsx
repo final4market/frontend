@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
-import Header from "./Header";
+import Header from "../header/Header";
 import SideBar from "./SideBar";
 import styles from "./css/MyStore.module.css";
 
@@ -17,14 +17,14 @@ export default function MyStore() {
   }, []);
 
   const fetchProfile = () => {
-    fetch(`http://localhost:9999/myStoreProfile/${memberId}`)
+    fetch(`http://localhost:9999/myPageProfile/${memberId}`)
       .then((response) => response.json())
       .then((data) => setProfile(data))
       .catch((error) => console.error("Error fetching profile: ", error));
   };
 
   const fetchProduct = () => {
-    fetch(`http://localhost:9999/myStoreProduct/${productNo}`)
+    fetch(`http://localhost:9999/myPageProduct/${productNo}`)
       .then((response) => response.json())
       .then((data) => setProduct(data))
       .catch((error) => console.error("Error fetching product: ", error));
@@ -63,8 +63,9 @@ export default function MyStore() {
               <div className={styles.my_store_product_price}>
                 {product.productPrice}원
               </div>
-              <div className={styles.my_store_detail}>
-                관심{product.interestCount}|
+              <div className={styles.my_store_product_detail}>
+                관심{product.interestCount}
+                <div className={styles.my_store_vertical_bar}>|</div>
                 채팅{product.chatCount}
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Footer from "./Footer";
-import Header from "./Header";
+import Header from "../header/Header";
 import SideBar from "./SideBar";
 import styles from "./css/MyInfo.module.css";
 
@@ -8,7 +8,7 @@ import styles from "./css/MyInfo.module.css";
 export default function MyInfo() {
   const [emailOption, setEmailOption] = useState('');
 
-  const EmailOptionChange = (e) => {
+  const HandleEmailChange = (e) => {
     setEmailOption(e.target.value);
   };
 
@@ -48,7 +48,7 @@ export default function MyInfo() {
               ) : (
                 <input className={styles.my_info_email_item} type="text" name="email_domain" value={emailOption} readOnly/>
               )}
-              <select className={styles.my_info_select_email} onChange={EmailOptionChange}>
+              <select className={styles.my_info_select_email} onChange={HandleEmailChange}>
                 <option value="naver.com">naver.com</option>
                 <option value="daum.net">daum.net</option>
                 <option value="gmail.com">gmail.com</option>
@@ -69,7 +69,7 @@ export default function MyInfo() {
         </div>
         <div className={styles.my_info_banner}>배너</div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

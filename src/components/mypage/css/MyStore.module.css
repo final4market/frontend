@@ -72,6 +72,12 @@
   height: 200px;
 }
 
+.my_store_product_detail {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: right;
+}
+
 .my_store_banner {
   width: 200px;
   border: 1px solid black;

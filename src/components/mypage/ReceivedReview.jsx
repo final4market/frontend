@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
-import Header from "./Header";
+import Header from "../header/Header";
 import ReceivedReviewCard from "./ReceivedReviewCard";
 import SideBar from "./SideBar";
 import styles from "./css/ReceivedReview.module.css";
@@ -11,7 +11,7 @@ const review = [
     name: "기계식 키보드",
     price: "70,000원",
     score: "★★★★★",
-    review: "기계식 키보드를 입문하기 위해서 구매했습니다. 타건했을 때의 소리가 일품이네요!" 
+    review: "기계식 키보드를 입문하기 위해서 구매했습니다. 타건했을 때의 소리가 일품이네요!"
   },
   {
     imageUrl: "/img/mypage/mouse.png",
@@ -58,7 +58,7 @@ export default function ReceivedReview() {
         </div>
         <div className={styles.received_review_banner}>배너</div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
