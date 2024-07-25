@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ProductInfo from './Sub_productInfo';
 import StoreInfo from './Sub_sellerInfo';
-import styles from './css/sub_imageSlider.module.css'; // 모듈 CSS 파일 가져오기
+import styles from './css/Sub_imageSlider.module.css'; // 모듈 CSS 파일 가져오기
 
 export default function ImageSlider() {
   const [productImg, setProductImg] = useState([]);

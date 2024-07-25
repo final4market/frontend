@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import MypageSideBar from './MypageSideBar';
+import MypageSideBar from './MyPageSideBar';
 import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
-import MypagReviewWrite from './MypagReviewWrite';
+import MypagReviewWrite from './MypageReviewWrite';
 
 const MypageProductPurchaseHistory = () => {
   const [memberProductList, setMemberProductList] = useState([]);
