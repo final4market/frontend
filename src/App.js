@@ -19,6 +19,7 @@ import MypageReviewList from './components/mypage/MypageReviewList';
 import RoleProtectedRoute from './components/auth/RoleProtectedRoute';
 import './services/AxiosSetup';
 import { AuthProvider } from './services/AuthContext';
+import ProductRegistrationUpdate from './components/productRegistration/ProductRegistrationUpdate';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/productPage" element={<SubMain />} />  
           <Route path="/sell-history" element={<MypageProductSalesList />} />
           <Route path="/productRegister" element={<ProductRegistration />} />
+          <Route path="/productRegisterUPdate" element={<ProductRegistrationUpdate />} />
           <Route path="/buy-history" element={<MypageProductPurchaseHistory />} />   
           <Route path="/writed-review" element={<MypageReviewList/>} />     
           <Route element={<RoleProtectedRoute requiredRole="ROLE_USER" />}>

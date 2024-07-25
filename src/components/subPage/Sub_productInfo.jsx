@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PurchaseSide from './Sub_side';
 import styles from './css/sub_productInfo.module.css';
-import Backdrop from './Sub_overlay';
 import Report from './sub_report';
 
 const ProductInfo = ({ productImage }) => {

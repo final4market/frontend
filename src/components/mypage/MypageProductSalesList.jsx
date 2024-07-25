@@ -4,11 +4,11 @@ import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
 import MypageProductSoldoutList from './MypageProductSoldoutList';
 import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
-
+import { useNavigate } from 'react-router-dom'; 
 
 const MypageProductSalesList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
-
+  const navigate = useNavigate(); // 추가
   const memberId = MypageMemberId(); // 커스텀 훅을 사용
 
   const readData = async (memberId) => {
@@ -31,9 +31,9 @@ const MypageProductSalesList = () => {
     }
   }
 
-  const productUpdate=()=>{
-   
-  }
+  const productUpdate = (productNo) => {
+    navigate(`/productRegisterUPdate/${productNo}`); // 수정 페이지로 이동
+  };
   useEffect(() => {
     if (memberId) {
       readData(memberId);
@@ -56,6 +56,7 @@ const MypageProductSalesList = () => {
               <div className={styles.MypageProductSalesList}>
                 <img className={styles.ProductSalesimg} src={`http://localhost:9999/file?productNo=${memberProduct.productNo}&productImageNo=0`} alt="Product" />
                 <div className={styles.ProductSalestext}>
+                  <p className=''>{memberProduct.productPrice}</p>
                   <p className={styles.productTitle}>{memberProduct.productTitle}</p>
                   <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
                 </div>
