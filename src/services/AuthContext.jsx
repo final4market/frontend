@@ -28,24 +28,21 @@ export const AuthProvider = ({ children }) => {
           console.log('Decoded token', decodedToken);
           if (decodedToken.exp < currentTime) {
             console.log('Token expired');
-            localStorage.removeItem('token');
-            localStorage.removeItem('tokenProvider');
-            setIsAuthenticated(false);
+            handleLogout();
           } else {
             console.log('Token is valid');
             setIsAuthenticated(true);
             setProfile(decodedToken);
-            setRoles(decodedToken.roles || []);
+            setRoles([decodedToken.role]);
           }
         } catch (error) {
           console.error('Failed to decode token:', error.message);
-          localStorage.removeItem('token');
-          localStorage.removeItem('tokenProvider');
-          setIsAuthenticated(false);
+          handleLogout();
         }
       }
     } else {
       setIsAuthenticated(false);
+      setRoles([]);
     }
     setLoading(false);
   };
@@ -65,9 +62,7 @@ export const AuthProvider = ({ children }) => {
       setRoles(['ROLE_USER']);
     } catch (error) {
       console.error('네이버 토큰 검증 실패:', error.message);
-      localStorage.removeItem('token');
-      localStorage.removeItem('tokenProvider');
-      setIsAuthenticated(false);
+      handleLogout();
     }
   };
 
@@ -85,10 +80,16 @@ export const AuthProvider = ({ children }) => {
       setRoles(['ROLE_USER']);
     } catch (error) {
       console.error('카카오 토큰 검증 실패:', error.message);
-      localStorage.removeItem('token');
-      localStorage.removeItem('tokenProvider');
-      setIsAuthenticated(false);
+      handleLogout();
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('tokenProvider');
+    setIsAuthenticated(false);
+    setRoles([]);
+    setProfile(null);
   };
 
   useEffect(() => {
