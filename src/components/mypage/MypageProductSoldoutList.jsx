@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
-import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
+import MypageMemberId from './MyPageMemberId';
 
 const MypageProductSoldoutList = () => {
   const [memberProductList, setMemberProductList] = useState([]);

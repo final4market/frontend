@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MypageSideBar from './MypageSideBar';
 import axios from 'axios';
 import styles from './css/MypageReviewList.module.css';
-import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
+import MypageMemberId from './MyPageMemberId'; // 커스텀 훅을 import
 
 const MypageReviewList = () => {
   const [memberProductList, setMemberProductList] = useState([]);

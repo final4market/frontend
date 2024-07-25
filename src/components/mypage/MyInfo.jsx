@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Footer from "./Footer";
 import Header from "../header/Header";
-import SideBar from "./SideBar";
+import SideBar from "./MypageSideBar";
 import styles from "./css/MyInfo.module.css";
 
 
@@ -69,7 +68,6 @@ export default function MyInfo() {
         </div>
         <div className={styles.my_info_banner}>배너</div>
       </div>
-      <Footer />
     </div>
   );
 };

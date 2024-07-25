@@ -1,76 +1,87 @@
-.side_bar {
+.side_bar_container {
   width: 300px;
   margin: 0px 50px;
-  display: flex;
-  flex-direction: column;
 }
 
-.side_bar > div,
-.side_bar > a {
-  padding: 20px 0;
+.side_bar_my_page {
+  margin: 20px 0px;
+}
+
+.side_bar_ul {
+  display: flex;
+  flex-flow: column nowrap;
+  text-decoration-line: none;
+}
+
+.side_bar_li {
+  list-style-type: none;
+  padding: 20px 0px;
+}
+
+.side_bar_ul .side_bar_li .side_bar_item {
   color: black;
   font-size: 24px;
   text-decoration: none;
 }
 
-.my_page {
+.side_bar_my_page {
   border-bottom: 1px solid black;
   font-size: 32px;
   font-weight: bold;
 }
 
-.my_store {
-  background-image: url('../img/store.png');
+.side_bar_my_store {
+  background-image: url('/public/img/mypage/store.png');
   background-repeat: no-repeat;
-  background-position: 100px center;
+  background-position: 5px;
   padding-left: 35px;
 }
 
-.my_info {
-  background-image: url('../img/info.png');
+.side_bar_my_info {
+  background-image: url('/public/img/mypage/info.png');
   background-repeat: no-repeat;
-  background-position: 100px center;
+  background-position: 5px;
   padding-left: 35px;
 }
 
-.buy_history {
-  background-image: url('../img/buy.png');
+.side_bar_buy_history {
+  background-image: url('/public/img/mypage/buy.png');
   background-repeat: no-repeat;
-  background-position: 115px center;
+  background-position: 5px;
   padding-left: 35px;
 }
 
-.sell_history {
-  background-image: url('../img/sell.png');
+.side_bar_sell_history {
+  background-image: url('/public/img/mypage/sell.png');
   background-repeat: no-repeat;
-  background-position: 115px center;
+  background-position: 5px;
   padding-left: 35px;
 }
 
-.like_product {
-  background-image: url('../img/like.png');
+.side_bar_interest_product {
+  background-image: url('/public/img/mypage/interest.png');
   background-repeat: no-repeat;
-  background-position: 115px center;
+  background-position: 5px;
   padding-left: 35px;
 }
 
-.writed_review {
-  background-image: url('../img/writed_review.png');
+.side_bar_writed_review {
+  background-image: url('/public/img/mypage/writed_review.png');
   background-repeat: no-repeat;
-  background-position: 115px center;
+  background-position: 5px;
   padding-left: 35px;
 }
 
-.received_review {
-  background-image: url('../img/received_review.png');
+.side_bar_received_review {
+  background-image: url('/public/img/mypage/received_review.png');
   background-repeat: no-repeat;
-  background-position: 115px center;
+  background-position: 5px;
   padding-left: 35px;
 }
 
-.follow_list {
-  background-image: url('../img/follow.png');
+.side_bar_follow_list {
+  background-image: url('/public/img/mypage/follow.png');
   background-repeat: no-repeat;
-  background-position: 140px center;
+  background-position: 5px;
   padding-left: 35px;
 }

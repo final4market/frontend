@@ -3,7 +3,7 @@ import MypageSideBar from './MypageSideBar';
 import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
 import MypageProductSoldoutList from './MypageProductSoldoutList';
-import MypageMemberId from './MypageMemberId'; // 커스텀 훅을 import
+import MypageMemberId from './MyPageMemberId';
 import { useNavigate } from 'react-router-dom'; 
 
 const MypageProductSalesList = () => {

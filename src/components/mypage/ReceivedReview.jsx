@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
 import Header from "../header/Header";
 import ReceivedReviewCard from "./ReceivedReviewCard";
-import SideBar from "./SideBar";
+import SideBar from "./MypageSideBar";
 import styles from "./css/ReceivedReview.module.css";
 
 const review = [
@@ -58,7 +57,6 @@ export default function ReceivedReview() {
         </div>
         <div className={styles.received_review_banner}>배너</div>
       </div>
-      <Footer />
     </div>
   );
 };

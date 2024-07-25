@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import styles from './css/sub_productInfo.module.css';
+import styles from './css/Sub_productInfo.module.css';
 import Backdrop from './Sub_overlay';
 import axios from 'axios';
 
