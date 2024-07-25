@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './css/sub_overlay.module.css';
+import styles from './css/sub_overlay.module.css'
 
 const Backdrop = ({ show, onClick, excludeClasses = [] }) => {
   if (!show) return null;
