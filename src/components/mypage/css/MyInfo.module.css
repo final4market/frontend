@@ -3,35 +3,35 @@
   padding: 0px;
 }
 
-.header_container {
+.my_info_header_container {
   width: 1440px;
   display: flex;
   flex-flow: column wrap;
   margin: 0px auto;
 }
 
-.side_container {
+.my_info_side_container {
   display: flex;
 }
 
-.my_info {
+.my_infomation {
   display: flex;
   font-size: 24px;
   padding: 20px 0px;
 }
 
-.main_container {
+.my_info_main_container {
   width: 700px;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
 }
 
-.info_content {
+.my_info_content {
   width: 500px;
 }
 
-.my_profile_image {
+.my_info_profile_image {
   width: 500px;
   height: 50px;
   background-image: url('/public/img/mypage/profile.png');
@@ -44,16 +44,16 @@
   box-sizing: border-box;
 }
 
-.profile_guide {
+.my_info_profile_guide {
   color: #9C9E9C;
   font-size: 12px;
 }
 
-.asterisk {
+.my_info_asterisk {
   color: red;
 }
 
-.register_button, .delete_button {
+.my_info_register_button, .my_info_delete_button {
   width: 50px;
   border: 1px solid black;
   background-color: white;
@@ -61,7 +61,7 @@
   margin: 5px 5px;
 }
 
-.info_item {
+.my_info_item {
   width: 500px;
   height: 30px;
   border: none;
@@ -69,7 +69,7 @@
   margin: 10px 0px;
 }
 
-.email_item {
+.my_info_email_item {
   width: calc(215px - 20px);
   height: 30px;
   border: none;
@@ -77,11 +77,11 @@
   margin: 10px 0px;
 }
 
-.button_container {
+.my_info_button_container {
   margin: 10px 0px;
 }
 
-.update_button {
+.my_info_update_button {
   width: 500px;
   height: 50px;
   border: none;
@@ -91,7 +91,7 @@
   font-size: 24px;
 }
 
-.withdrawal_button {
+.my_info_withdrawal_button {
   width: 500px;
   height: 50px;
   border: none;
@@ -101,9 +101,9 @@
   font-size: 24px;
 }
 
-.banner {
+.my_info_banner {
   width: 200px;
   border: 1px solid black;
   text-align: center;
-  margin: 20px;
+  margin: 20px 50px;
 }
