@@ -66,7 +66,7 @@
   font-weight: bold;
 }
 
-hr {
+.purchase_side hr {
   border: 3px solid #F1F4F6;
 }
 
@@ -132,13 +132,14 @@ hr {
 .last_price {
   position: absolute;
   right: 30px;
+  top: 30px;
   font-size: 24px;
   font-weight: bold;
   color: green;
 }
 
 .last_price_container {
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .payment_amount button {
@@ -166,6 +167,7 @@ hr {
   transition: transform 0.4s ease, opacity 0.4s ease;
   transform: translateX(100%);
   opacity: 0;
+  box-sizing: border-box;
 }
 
 .postcode_side{
@@ -242,6 +244,7 @@ hr {
   border-radius: 10px;
   margin-bottom: 30px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .addAddress{
@@ -300,6 +303,7 @@ hr {
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 30px;
+  box-sizing: border-box;
 }
 
 .mainAddressContainer{
@@ -338,12 +342,13 @@ hr {
 }
 
 .addAddressInfo input{
-    width: 550px;
-    padding: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-weight: bold;
-    font-size: 16px;
+  width: 550px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 .postcode_side {

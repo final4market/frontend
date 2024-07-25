@@ -14,7 +14,7 @@ import MyStore from './components/mypage/MyStore';
 import InterestProduct from './components/mypage/InterestProduct';
 import ReceivedReview from './components/mypage/ReceivedReview';
 import SubMain from './components/subPage/Sub_main';
-import ProtectedRoute from './admin/components/ProtectedRoute';
+import RoleProtectedRoute from './components/auth/RoleProtectedRoute';
 import './services/AxiosSetup';
 import { AuthProvider } from './services/AuthContext';
 
@@ -25,19 +25,21 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/productPage" element={<SubMain />} />
+          <Route path="/login" element={<LoginForm />} />          
           <Route path="/naverAuthCallback" element={<NaverAuthCallback />} />
           <Route path="/kakaoAuthCallback" element={<KakaoAuthCallback />} />
-          <Route path="/myStore" element={<MyStore/>}/>
-          <Route path="/myInfo" element={<MyInfo />} />
-          <Route path="/productRegister" element={<ProductRegistration />} />
-          <Route path="/sell-history" element={<MypageProductSalesList />} />
-          <Route path="/buy-history" element={<MypageProductPurchaseHistory />} />
-          <Route path="/interestProduct" element={<InterestProduct />} />
-          <Route path="/receivedReview" element={<ReceivedReview />} />
-          <Route element={<ProtectedRoute />}>
-          <Route path="/admin" element={<Navigate to="/admin/reports" />} />
+          <Route path="/productPage" element={<SubMain />} />         
+          <Route element={<RoleProtectedRoute requiredRole="ROLE_USER" />}>
+            <Route path="/myStore" element={<MyStore/>}/>
+            <Route path="/myInfo" element={<MyInfo />} />
+            <Route path="/productRegister" element={<ProductRegistration />} />
+            <Route path="/sell-history" element={<MypageProductSalesList />} />
+            <Route path="/buy-history" element={<MypageProductPurchaseHistory />} />
+            <Route path="/interestProduct" element={<InterestProduct />} />
+            <Route path="/receivedReview" element={<ReceivedReview />} />
+          </Route>          
+          <Route element={<RoleProtectedRoute requiredRole="ROLE_ADMIN" />}>
+            <Route path="/admin" element={<Navigate to="/admin/reports" />} />
             <Route path="/admin/members" element={<AdminMembers />} />
             <Route path="/admin/reports" element={<AdminReports />} />
           </Route>

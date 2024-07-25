@@ -16,14 +16,14 @@ const LoginForm = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const navigate = useNavigate();
-    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated, setRoles } = useContext(AuthContext);
 
     useEffect(() => {
         if (isAuthenticated) {
             setModalMessage('이미 로그인한 상태입니다');
             setShowModal(true);
         }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated]);
 
 
     useEffect(() => {
@@ -96,9 +96,10 @@ const LoginForm = () => {
             }
 
             setIsAuthenticated(true);
+            setRoles(decodedToken.role);
 
             const userRole = decodedToken.role;
-            if (userRole === '관리자') {
+            if (userRole.includes('ROLE_ADMIN')) {
                 navigate('/admin');
             } else {
                 navigate('/');

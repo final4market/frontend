@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useRef, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './css/Sub_sellerInfo.module.css'
+import styles from './css/Sub_sellerInfo.module.css';
 
 const StoreInfo = () => {
   const followBtn = useRef();
@@ -15,38 +15,44 @@ const StoreInfo = () => {
 
   const followClick = () => {
     setIsFollowing((prevState) => !prevState);
-    axios.get('http://localhost:9999/insertFollow?buyerId=member10&sellerId=member4')
-      .then(response => {
-        console.log(response);
-        alert(response.data.msg);
-      })
-      .catch(error => {
-        console.error('Error occurred:', error);
-      });
-  };
 
+    axios.get('http://localhost:9999/insertFollow?buyerId=member10&sellerId=member4')
+    .then(response => {
+      console.log(response);
+      alert(response.data.msg);
+    })
+    .catch(error => {
+      console.error('Error occurred:', error); 
+    });
+  };
+  
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const storeResponse = await axios.get('http://localhost:9999/storeInfo?memberId=member4');
+      try {        
+        const storeResponse = await axios.get('http://localhost:9999/api/member/storeInfo?memberId=member4');
         setStoreInfo(storeResponse.data);
 
-        const sellerProfileResponse = await axios.get('http://localhost:9999/sellerProfile?memberId=member4');
+        const sellerProfileResponse = await axios.get('http://localhost:9999/api/member/sellerProfile?memberId=member4');
         setProfileInfo(sellerProfileResponse.data);
-
+  
         const buyerIds = storeResponse.data.filter(item => item.review !== null).map(item => item.buyerId);
         if (buyerIds.length > 0) {
-          const buyerProfileResponse = await axios.post('http://localhost:9999/buyerProfile', { memberId: buyerIds });
+          const buyerProfileResponse = await axios.post('http://localhost:9999/api/member/buyerProfile', { memberId: buyerIds });
           setBuyerProfileInfo(buyerProfileResponse.data);
         }
 
-        const response = await axios.get('http://localhost:9999/sellerProductImage?memberId=member4');
+        const response = await axios.get('http://localhost:9999/api/member/sellerProductImage?memberId=member4');
         setSellerProductImage(response.data);
+
+        const followStatusResponse = await axios.get('http://localhost:9999/selectFollowStatus?memberId=member4');
+        // console.log(followStatusResponse.data);
+        const userLiked = followStatusResponse.data.includes('member10');
+        setIsFollowing(userLiked);
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     fetchData();
   }, []);
 
@@ -54,7 +60,7 @@ const StoreInfo = () => {
   const remainingReviews = storeInfo.filter(item => item.review !== null).length;
 
   return (
-    <div className={styles.product_content_container}>
+   <div className={styles.product_content_container}>
       <div className={styles.seller_information}>
         <h2>상점 정보</h2>
         <hr />
@@ -70,7 +76,7 @@ const StoreInfo = () => {
               <Link>팔로워 {storeInfo.length > 0 && storeInfo[0].followerCount}명</Link>
             </div>
             <div className={styles.followBtn_container}>
-              <img src={isFollowing ? "/img/star.png" : "/img/follow.png"} ref={followImg} alt="followImage" />
+              <img src={isFollowing ? "/img/unfollow.png" : "/img/follow.png"} ref={followImg} alt="followImage" />
               <button className={styles.follow} ref={followBtn} onClick={followClick}>
                 {isFollowing ? '팔로잉' : '팔로우'}
               </button>
@@ -83,8 +89,8 @@ const StoreInfo = () => {
                       if (el && !sellerImageCount.current.includes(el)) {
                         sellerImageCount.current.push(el);
                       }
-                    }} /></Link>
-                    <p>{img.price.toLocaleString()}원</p>
+                    }}/></Link>
+                     <p>{img.price.toLocaleString()}원</p>
                   </div>
                 )
               ))}
@@ -99,7 +105,10 @@ const StoreInfo = () => {
             )}
           </div>
           <div className={styles.seller_review_container}>
-            <h2>상점 후기</h2>
+            <div className={styles.seller_review_header}> 
+              <h2 className={styles.review_title}>상점 후기</h2>
+              <h2 className={styles.review_count}>{remainingReviews}</h2>
+            </div>
             <hr />
             <div className={styles.review}>
               {remainingReviews === 0 ? (
@@ -115,11 +124,15 @@ const StoreInfo = () => {
                         </div>
                         <div className={styles.buyer_review}>
                           <div className={styles.buyer_review_img}>
-                            <img src="/img/star.png" alt="star" />
-                            <img src="/img/star.png" alt="star" />
-                            <img src="/img/star.png" alt="star" />
-                            <img src="/img/star.png" alt="star" />
-                            <img src="/img/star.png" alt="star" />
+                          {(() => {
+                            const stars = [];
+                            for (let i = 0; i < item.reviewScore; i++) {
+                              stars.push(
+                                <img key={i} src="/img/star.png" alt="star" />
+                              );
+                            }
+                            return stars;
+                          })()}
                           </div>
                           <p>{item.review}</p>
                         </div>
@@ -131,7 +144,7 @@ const StoreInfo = () => {
               )}
             </div>
           </div>
-          {remainingReviews > 0 && (
+          {remainingReviews - 2 > 0 && (
             <div className={styles.review_more}>
               <Link to="#">후기 더보기</Link>
               <hr />

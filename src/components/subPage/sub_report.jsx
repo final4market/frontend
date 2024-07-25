@@ -25,7 +25,7 @@ const Report = ({ isReportOpen, onClose }) => {
       [type]: value
     }));
   };
-  console.log(reportContents);
+  // console.log(reportContents);
   const submitReport = async (type) => {
     // 유형에 따른 문구를 반환하는 함수
     const getTypeText = (type) => {
@@ -39,19 +39,20 @@ const Report = ({ isReportOpen, onClose }) => {
       return typeText[type] || '기타';
     };
     const typeText = getTypeText(type);
-    console.log(typeText);
-
+    // console.log(typeText);
+  
     try {
       // axios 요청에 params로 전달
       const response = await axios.post('http://localhost:9999/insertReport', {
-        productNo: '15',
+        productNo: '10',
         claimerId: 'member10',
         sellerId: 'member4',
         reportContent: `[${typeText}] ${reportContents[type]}` // 타입에 따른 문구와 내용을 결합
       });
-
+  
       // 요청이 성공적으로 완료되면 처리할 로직
       alert(response.data.msg);
+      onClose();
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +62,6 @@ const Report = ({ isReportOpen, onClose }) => {
       <Backdrop
         show={isReportOpen}
         onClick={onClose}
-        excludeClasses={['report_container']}
       />
       {isReportOpen && (
         <div className={styles.report_container}>
@@ -75,9 +75,9 @@ const Report = ({ isReportOpen, onClose }) => {
               <Fragment key={type}>
                 <div className={`${styles.detailReport} ${expanded === type ? styles.expandable : ''}`}>
                   <p>{type === 'ad' ? '광고성 상점이에요.' :
-                    type === 'inaccurate' ? '상품 정보가 부정확해요.' :
+                      type === 'inaccurate' ? '상품 정보가 부정확해요.' :
                       type === 'prohibited' ? '거래 금지 품목으로 판단돼요.' :
-                        type === 'scam' ? '사기가 의심돼요.' : '기타'}</p>
+                      type === 'scam' ? '사기가 의심돼요.' : '기타'}</p>
                   <img
                     src={expanded === type ? '/img/report_click_arrow.png' : '/img/report_arrow.png'}
                     alt="arrow"
