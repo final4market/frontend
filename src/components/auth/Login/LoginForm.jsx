@@ -96,9 +96,10 @@ const LoginForm = () => {
             }
 
             setIsAuthenticated(true);
+            setRoles(decodedToken.role);
 
             const userRole = decodedToken.role;
-            if (userRole === 'ROLE_ADMIN') {
+            if (userRole.includes('ROLE_ADMIN')) {
                 navigate('/admin');
             } else {
                 navigate('/');
