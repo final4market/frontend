@@ -27,7 +27,7 @@ export default function MyPageMyStore() {
           const productResponse = await axios.get(`http://localhost:9999/api/product/myPageProduct/${memberId}`);
           setMyProduct(productResponse.data);
         } catch (error) {
-          console.error("데이터를 가져오는 중 에러 발생:", error);
+          console.error("데이터를 가져오는 중 오류 발생:", error);
         }
       };
       myStoreData();
@@ -40,27 +40,27 @@ export default function MyPageMyStore() {
       <div className={styles.my_store_side_container}>
         <MyPageSideBar/>
         <div className={styles.my_store_main_container}>
-            {myProfile.map((profile, index) => (
-              <div className={styles.my_store_profile_container} key={index}>
+            {myProfile.map((data, idx) => (
+              <div className={styles.my_store_profile_container} key={idx}>
                 <img
                   className={styles.my_store_profile_image}
-                  src={profile.memberProfilePath ? profile.memberProfilePath : defaultProfileImage}
-                  alt="Profile"
+                  src={data.memberProfilePath ? data.memberProfilePath : defaultProfileImage}
+                  alt="프로필 이미지"
                 />
                 <div className={styles.my_store_profile_info}>
-                  {profile.memberNick ? (
+                  {data.memberNick ? (
                     <>
-                      {profile.memberNick}
+                      {data.memberNick}
                       <span>| 평점:</span>
                       <span className={styles.my_store_score}>★</span>
-                      {profile.memberScore}
+                      {data.memberScore}
                     </>
                   ) : (
                     <>
                       <span className={styles.my_store_no_nick}>내 정보에서 닉네임을 설정하세요.</span>
                       <span>| 평점:</span>
                       <span className={styles.my_store_score}>★</span>
-                      {profile.memberScore}
+                      {data.memberScore}
                     </>
                   )}
                 </div>
@@ -69,38 +69,38 @@ export default function MyPageMyStore() {
           <div className={styles.my_store_nav_container}>
             <ul className={styles.my_store_nav_ul}>
               <li className={styles.my_store_nav_li}>
-                <Link to="/my-store" className={styles.my_store_nav_item}>상품</Link>
+                <Link to="/myStore" className={styles.my_store_nav_item}>상품</Link>
               </li>
               <li className={styles.my_store_nav_li}>
-                <Link to="/received-review" className={styles.my_store_nav_item}>후기</Link>
+                <Link to="/receivedReview" className={styles.my_store_nav_item}>후기</Link>
               </li>
               <li className={styles.my_store_nav_li}>
-                <Link to="/follow-list" className={styles.my_store_nav_item}>팔로우</Link>
+                <Link to="/followList" className={styles.my_store_nav_item}>팔로우</Link>
               </li>
             </ul>
           </div>
           <div className={styles.my_store_product_container}>
             {myProduct.length > 0 ? (
-              myProduct.map((product, index) => (
-                <div className={styles.my_store_product_list} key={index}>
+              myProduct.map((data, idx) => (
+                <div className={styles.my_store_product_list} key={idx}>
                   <img
                     className={styles.my_store_product_image}
-                    src={product.productImagePath}
+                    src={data.productImagePath}
                     alt="상품 이미지"
                   />
                   <div className={styles.my_store_product_title}>
-                    <h3>{product.productTitle}</h3>
+                    <h3>{data.productTitle}</h3>
                   </div>
                   <div className={styles.my_store_product_price}>
-                    {formatPrice(product.productPrice)}원
+                    {formatPrice(data.productPrice)}원
                   </div>
                   <div className={styles.my_store_product_detail}>
-                    관심 {product.interestCount} | 채팅 {product.chatCount}
+                    관심 {data.interestCount} | 채팅 {data.chatCount}
                   </div>
                 </div>
               ))
             ) : (
-              <div className={styles.my_store_no_product}>등록한 상품이 없습니다.</div>
+              <div className={styles.my_store_nothing}>등록한 상품이 없습니다.</div>
             )}
           </div>
         </div>

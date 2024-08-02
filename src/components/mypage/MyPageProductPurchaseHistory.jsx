@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import MyPageSideBar from './MyPageSideBar';
 import axios from 'axios';
-import styles from './css/MypageProductSalesList.module.css';
-import MypagReviewWrite from './MypageReviewWrite';
+import styles from './css/MyPageProductSalesList.module.css';
+import MypagReviewWrite from './MyPageReviewWrite';
 import MyPageMemberId from './MyPageMemberId';
 
-const MypageProductPurchaseHistory = () => {
+const MyPageProductPurchaseHistory = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const [showReviewForm, setShowReviewForm] = useState({}); // 리뷰 작성 폼 상태
   const buyerId = MyPageMemberId(); // 커스텀 훅을 사용
@@ -71,13 +71,13 @@ const MypageProductPurchaseHistory = () => {
 
   return (
     <div>
-      <div className={styles.MypageProductSalesListComponent}>
+      <div className={styles.MyPageProductSalesListComponent}>
         <MyPageSideBar />
         <div>
           <h3 className={styles.MypageProductTitle}>최근구매내역 ({reviewWritable.length})</h3>
           {reviewWritable.map((memberProduct, index) => (
             <div key={index}>
-              <div className={styles.MypageProductSalesList}>
+              <div className={styles.MyPageProductSalesList}>
                 <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
                 <div className={styles.ProductSalestext}>
                   <p className={styles.ProductSalesthDate}>구매확정일 : {memberProduct.thDate}</p>
@@ -104,7 +104,7 @@ const MypageProductPurchaseHistory = () => {
           <div className={styles.ProductBuyItems}>
           <h3 className={styles.MypageProductTitle}>구매내역({reviewExpired.length})</h3>
           {reviewExpired.map((memberProduct, index) => (
-              <div key={index} className={styles.MypageProductSalesList}>
+              <div key={index} className={styles.MyPageProductSalesList}>
                 <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
                 <div className={styles.ProductSalestext}>
                   <p className={styles.ProductSalesthDate}>구매확정일 : {memberProduct.thDate}</p>
@@ -124,4 +124,4 @@ const MypageProductPurchaseHistory = () => {
   );
 };
 
-export default MypageProductPurchaseHistory;
+export default MyPageProductPurchaseHistory;

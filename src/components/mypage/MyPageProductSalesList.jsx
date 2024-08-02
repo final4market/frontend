@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import MyPageSideBar from './MyPageSideBar';
 import axios from 'axios';
-import styles from './css/MypageProductSalesList.module.css';
+import styles from './css/MyPageProductSalesList.module.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import MyPageMemberId from './MyPageMemberId';
 
-const MypageProductSalesList = () => {
+const MyPageProductSalesList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const [memberProductsoldoutList, setMemberProductsoldoutList] = useState([]);
   const [displayType, setDisplayType] = useState('saling');
@@ -56,7 +56,7 @@ const MypageProductSalesList = () => {
 
   return (
     <div>
-      <div className={styles.MypageProductSalesListComponent}>
+      <div className={styles.MyPageProductSalesListComponent}>
         <MyPageSideBar />
         <div className={styles.MyPageProductSaleMainContainer}>
           <div className={styles.ProductButtonContainer}>
@@ -75,7 +75,7 @@ const MypageProductSalesList = () => {
           </div>
           <div className={styles.MyPageProducutMainSalesList}>
             {displayType === 'saling' && memberProductList.map((memberProduct, index) => (
-              <div key={index} className={styles.MypageProductSalesList}>
+              <div key={index} className={styles.MyPageProductSalesList}>
                 <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
                 <div className={styles.ProductSalestext}>
                   <p className={styles.productTitle}>{memberProduct.productTitle}</p>
@@ -88,7 +88,7 @@ const MypageProductSalesList = () => {
             ))}
           </div>
           {displayType === 'soldout' && memberProductsoldoutList.map((memberProduct, index) => (
-            <div key={index} className={styles.MypageProductSalesList}>
+            <div key={index} className={styles.MyPageProductSalesList}>
               <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
               <div className={styles.ProductSalestext}>
                 <p className={styles.ProductSalesthDate}>구매확정일: {memberProduct.thDate}</p>
@@ -104,4 +104,4 @@ const MypageProductSalesList = () => {
   );
 };
 
-export default MypageProductSalesList;
+export default MyPageProductSalesList;

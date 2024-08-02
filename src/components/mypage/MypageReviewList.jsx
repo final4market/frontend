@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import MyPageSideBar from './MyPageSideBar';
 import axios from 'axios';
-import styles from './css/MypageReviewList.module.css';
+import styles from './css/MyPageReviewList.module.css';
 import MyPageMemberId from './MyPageMemberId'; // 커스텀 훅을 import
 
-const MypageReviewList = () => {
+const MyPageReviewList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const [reviewList, setReviewList] = useState({}); // 리뷰 목록을 객체로 변경
   const [editReviewState, setEditReviewState] = useState({}); // 수정 상태를 객체로 변경
@@ -193,4 +193,4 @@ const MypageReviewList = () => {
   );
 };
 
-export default MypageReviewList;
+export default MyPageReviewList;

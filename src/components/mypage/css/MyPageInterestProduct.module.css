@@ -1,8 +1,3 @@
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
 .interest_product_header_container {
   width: 1440px;
   display: flex;
@@ -38,7 +33,7 @@
 }
 
 .interest_product_image {
-  width: 300px;
+  width: 100%;
   height: 200px;
 }
 
@@ -48,9 +43,9 @@
   justify-content: right;
 }
 
-.interest_product_no_interest {
+.interest_product_nothing {
   width: 700px;
-  font-size: 64px;
+  font-size: 48px;
   text-align: center;
   margin: 100px 0px;
 }
