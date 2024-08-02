@@ -91,7 +91,7 @@ export const MainPage = () => {
                             <div>
                             <p className={styles.mainProductTitle}>{product.productTitle}</p>
                             <p className={styles.mainProductPrice}>￦{formatPrice(product.productPrice)}</p>
-                               
+                               <p>조회수{product.productCount}        좋아요{product.productLike}</p>
                             </div>
                         </div>
                     ))}
@@ -111,8 +111,9 @@ export const MainPage = () => {
                         <div key={index} className={styles.mainPageProductItem}>
                             <img src={product.productImagePath} alt="Product" />
                             <div>
-                                <p>{product.productTitle}</p>
-                                <p>{product.productPrice}</p>
+                                <p className={styles.mainProductTitle}>{product.productTitle}</p>
+                                <p className={styles.mainProductPrice}>￦{formatPrice(product.productPrice)}</p>
+                                <p>조회수{product.productCount}        좋아요{product.productLike}</p>
                             </div>
                         </div>
                     ))}

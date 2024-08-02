@@ -42,7 +42,7 @@ function App() {
           <Route path="/kakaoAuthCallback" element={<KakaoAuthCallback />} />
           <Route path="/productPage" element={<SubMain />} />  
           <Route path="/search" element={<SearchBar />} />     
-          <Route path="/productMainPage" element={<MainPage/>} />    
+          <Route path="/" element={<MainPage/>} />    
           <Route element={<RoleProtectedRoute requiredRole="ROLE_USER" />}>
             <Route path="/myStore" element={<MyStore/>}/>
             <Route path="/myInfo" element={<MyInfo />} />
