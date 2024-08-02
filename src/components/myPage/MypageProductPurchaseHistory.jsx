@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './css/MypageProductSalesList.module.css';
 import MypagReviewWrite from './MypageReviewWrite';
 import MypageMemberId from './MypageMemberId';
+import { useNavigate } from 'react-router-dom';
 
 const MypageProductPurchaseHistory = () => {
   const [memberProductList, setMemberProductList] = useState([]);
@@ -61,6 +62,12 @@ const MypageProductPurchaseHistory = () => {
     [[], []]
   );
 
+  const hasReview = (product) => product.review != null;
+ 
+  const navigate = useNavigate();
+  const gotoreviewList = () => {
+    navigate('/writed-review');
+  };
   // 구매후기 작성 버튼 클릭 핸들러
   const handleReviewButtonClick = (index) => {
     setShowReviewForm((prev) => ({
@@ -85,14 +92,21 @@ const MypageProductPurchaseHistory = () => {
                   <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
                 </div>
                 <div>
-                  <button
-                    className={styles.reviewWriteButton}
-                    onClick={() => handleReviewButtonClick(index)}
-                  >
-                    구매후기 작성하기
-                  </button>
-                  <p className={styles.reviewWriteText}>작성기한 : {memberProduct.deadline} ({`D-${memberProduct.dDay}`})</p>
-              </div>
+                  {hasReview(memberProduct) ? (
+                    <button className={styles.productOver} onClick={gotoreviewList}>작성한 후기 보기</button>
+                  ) : (
+                    <>
+                      <button
+                        className={styles.reviewWriteButton}
+                        onClick={() => handleReviewButtonClick(index)}
+                      >
+                        구매후기 작성하기
+                      </button>
+                      <p className={styles.reviewWriteText}>작성기한 : {memberProduct.deadline} ({`D-${memberProduct.dDay}`})</p>
+                    </>
+                  )}
+                </div>
+            
               </div>
               {showReviewForm[index] && <MypagReviewWrite 
                productNo={memberProduct.productNo}
@@ -112,8 +126,14 @@ const MypageProductPurchaseHistory = () => {
                   <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
                 </div>
                 <div>
+                {hasReview(memberProduct) ? (
+                    <button className={styles.productOver}>리뷰 등록 완료</button>
+                  ) : (
+                    <>
                   <button className={styles.productOver}>기한 만료</button>
                   <p className={styles.productText}>작성기한 : {memberProduct.deadline} (기한 초과)</p>
+                  </>
+                  )}
               </div>
               </div>
           ))}

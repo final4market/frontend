@@ -53,7 +53,6 @@ export default function Header() {
       <div className={styles.header_container}>
         <div className={styles.header}>
           <div className={styles.link_container}>
-            <Link to="#">로그인/회원가입</Link>
             {isAuthenticated ? (
               <Link to="/" onClick={handleLogout} className={styles.logoutButton}>
                 로그아웃
@@ -83,9 +82,9 @@ export default function Header() {
                   <p>카테고리</p>
                 </div>
                 <div className={styles.category_container}>
-                  <CategorySelector 
-                    onCategoryChange={handleCategoryChange} 
-                    onParentChange={handleParentChange} 
+                  <CategorySelector
+                    onCategoryChange={handleCategoryChange}
+                    onParentChange={handleParentChange}
                   />
                 </div>
               </li>
@@ -109,7 +108,7 @@ export default function Header() {
             </ul>
           </nav>
         </div>
-        <Chat isChatOpen={isChatOpen} onClose={closeChat}/>
+        <Chat isChatOpen={isChatOpen} onClose={closeChat} />
       </div>
       <div className={styles.header_hr}>
         <hr />
