@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../header/Header";
-import MyPageMemberId from "./MyPageMemberId";
+import MyPageMemberId from "./MypageMemberId";
 import MyPageSideBar from "./MyPageSideBar";
 import styles from "./css/MyPageInterestProduct.module.css";
 

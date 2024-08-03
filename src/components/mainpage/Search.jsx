@@ -4,12 +4,14 @@ import Header from '../header/Header';
 import CategorySelector from './CategorySelector';
 import styles from './css/Search.module.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 function SearchBar() {
+  const query = useQuery();
   const [searchResultproductList, setSearchResultproductList] = useState([]);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
@@ -27,7 +29,8 @@ function SearchBar() {
     categoryNo: '' // 두 번째 카테고리 번호 추가
   });
 
-  const query = useQuery();
+ 
+
   const prevFormDataRef = useRef(formData);
 
   useEffect(() => {
@@ -39,8 +42,8 @@ function SearchBar() {
     setFormData(prevState => ({
       ...prevState,
       searchQuery: queryParam,
-      parentCategoryNo,
-      categoryNo
+      parentCategoryNo:'',
+      categoryNo:''
     }));
   }, [query.toString()]);
 
@@ -218,7 +221,8 @@ function SearchBar() {
         {searchResultproductList.length > 0 ? (
           searchResultproductList.map((searchProduct, index) => (
                <div  key={index} className={styles.productContainer}>
-                <img className={styles.ProductSalesimg} src={searchProduct.productImagePath} alt="Product" />
+              <Link to={`/productPage/${searchProduct.productNo}`}>
+                 <img className={styles.ProductSalesimg} src={searchProduct.productImagePath} alt="Product" /></Link>
                 <div className={styles.ProductSalestext}>
                   <p className={styles.searchProductTitle}>{searchProduct.productTitle}</p>
                   <p className={styles.searchProductPrice}>￦{formatPrice(searchProduct.productPrice)}</p>

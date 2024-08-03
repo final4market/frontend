@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import MyPageSideBar from './MyPageSideBar';
+import Header from './../header/Header'
 import axios from 'axios';
 import styles from './css/MypageReviewList.module.css';
-import MyPageMemberId from './MyPageMemberId'; // 커스텀 훅을 import
+import MyPageMemberId from './MypageMemberId';// 커스텀 훅을 import
+import { Link } from 'react-router-dom';
 
 const MypageReviewList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
@@ -137,14 +139,16 @@ const MypageReviewList = () => {
 
   return (
     <div>
+      <Header/>
       <div className={styles.MypageProductSalesListComponent}>
         <MyPageSideBar />
-        <div className={styles.ProductMainContainer}>
+        <div className={styles.MypageProductListMainContainer}>
           <h3 className={styles.ProductMainTitle}>내가 작성한 후기목록 ({memberProductList.length})</h3>
           {memberProductList.map((memberProduct, index) => (
             <div key={index}>
               <div className={styles.MypageProductSalesList}>
-                <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
+                <Link to={`/productPage/${memberProduct.productNo}`}>
+              <img className={styles.ProductSalesimg} src={memberProduct.productImagePath}  alt="Product" /> </Link>
                 <div className={styles.ProductSalestext}>
                   <p className={styles.productTitle}>{memberProduct.productTitle}</p>
                   <p className={styles.ProductSalesthDate}>판매자 : {memberProduct.sellerId}</p>

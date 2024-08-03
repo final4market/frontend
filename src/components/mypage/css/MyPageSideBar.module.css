@@ -1,7 +1,12 @@
 .side_bar_container {
   width: 300px;
   margin: 0px 50px;
+  padding: 0;
+
 }
+
+
+
 
 .side_bar_my_page {
   border-bottom: 1px solid black;

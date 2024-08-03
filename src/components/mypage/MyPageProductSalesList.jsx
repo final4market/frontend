@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import MyPageSideBar from './MyPageSideBar';
 import axios from 'axios';
+import Header from '../header/Header';
 import styles from './css/MyPageProductSalesList.module.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import MyPageMemberId from './MyPageMemberId';
+import MyPageMemberId from './MypageMemberId';
 
 const MypageProductSalesList = () => {
   const [memberProductList, setMemberProductList] = useState([]);
@@ -55,10 +56,11 @@ const MypageProductSalesList = () => {
   };
 
   return (
-    <div>
+    <div >
+      <Header/>
       <div className={styles.MypageProductSalesListComponent}>
         <MyPageSideBar />
-        <div className={styles.MyPageProductSaleMainContainer}>
+        <div className={styles.MypageProductListMainContainer}>
           <div className={styles.ProductButtonContainer}>
             <button
               className={`${styles.ProductSale} ${displayType === 'saling' ? styles.active : ''}`}
@@ -76,7 +78,8 @@ const MypageProductSalesList = () => {
           <div className={styles.MyPageProducutMainSalesList}>
             {displayType === 'saling' && memberProductList.map((memberProduct, index) => (
               <div key={index} className={styles.MypageProductSalesList}>
-                <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
+                <Link to={`/productPage/${memberProduct.productNo}`}>
+                <img className={styles.ProductSalesimg} src={memberProduct.productImagePath}  alt="Product" /> </Link>
                 <div className={styles.ProductSalestext}>
                   <p className={styles.productTitle}>{memberProduct.productTitle}</p>
                   <p>조회수 {memberProduct.productCount}</p>
@@ -89,7 +92,8 @@ const MypageProductSalesList = () => {
           </div>
           {displayType === 'soldout' && memberProductsoldoutList.map((memberProduct, index) => (
             <div key={index} className={styles.MypageProductSalesList}>
-              <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
+              <Link to={`/productPage/${memberProduct.productNo}`}>
+              <img className={styles.ProductSalesimg} src={memberProduct.productImagePath}  alt="Product" /> </Link>
               <div className={styles.ProductSalestext}>
                 <p className={styles.ProductSalesthDate}>구매확정일: {memberProduct.thDate}</p>
                 <p className={styles.productTitle}>{memberProduct.productTitle}</p>
