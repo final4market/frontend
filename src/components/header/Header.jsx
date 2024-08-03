@@ -53,41 +53,16 @@ export default function Header() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const categoryResponse = await axios.get('http://localhost:9999/api/product/category/list');
-        setCategoryAllInfo(categoryResponse.data);
-      } catch (error) {
-        console.error('Error fetching category data:', error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (parentNumber !== null) {
-      const fetchProductCategories = async () => {
-        try {
-          const response = await axios.get(`http://localhost:9999/api/product/category/list/${parentNumber}`);
-          setProductCategoryList(response.data);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      fetchProductCategories();
-    } else {
-      setProductCategoryList([]);
-    }
-  }, [parentNumber]);
+    console.log('Header isAuthenticated', isAuthenticated);
+  }, [isAuthenticated]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('tokenProvider');
     setIsAuthenticated(false);
-    navigate(0);
+    navigate('/');
   };
 
- 
 
   return (
     <>
@@ -124,32 +99,11 @@ export default function Header() {
                   <img src='/img/menu.png' className={styles.menu_bar} alt='menu' />
                   <p>카테고리</p>
                 </div>
-                <div className={`${styles.category_container} ${isSubCategoryOpen ? styles.open : ''}`}>
-                  <ul className={styles.category}>
-                    {categoryAllInfo.map((main) => (
-                      <li
-                        key={main.categoryNo}
-                        className={styles.main_category}
-                        onMouseEnter={() => setParentNumber(main.categoryNo)}
-                        onMouseLeave={() => setParentNumber(null)}
-                      >
-                        <a href='#'>{main.categoryName}</a>
-                        {parentNumber === main.categoryNo && (
-                          <div className={styles.sub_category_container}>
-                            <div className={styles.sub_category_block}>
-                              <ul className={styles.sub_category}>
-                                {productCategoryList.map((sub) => (
-                                  <li key={sub.categoryNo}>
-                                    <a href='#'>{sub.categoryName}</a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
+                <div className={styles.category_container}>
+                  <CategorySelector
+                    onCategoryChange={handleCategoryChange}
+                    onParentChange={handleParentChange}
+                  />
                 </div>
               </li>
               <li className={styles.menu}><Link to='#'>무료 나눔</Link></li>

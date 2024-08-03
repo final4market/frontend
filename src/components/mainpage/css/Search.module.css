@@ -82,8 +82,8 @@
 
 .productContainer{
   flex: 0 1 calc(20% - 15px); /* 5 items per row with spacing */
-  margin: 0px auto;
   box-sizing: border-box;
+  margin-left: 15px;
 }
 
 .ProductSalesimg{

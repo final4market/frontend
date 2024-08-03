@@ -15,8 +15,8 @@ margin: 0 auto;
 
 .mainPageProductItem {
   flex: 0 1 calc(20% - 15px); /* 5 items per row with spacing */
-  margin: 0px auto;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .mainPageProductItem img {
