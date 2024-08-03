@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import MyPageSideBar from './MyPageSideBar';
+import MypageSideBar from './MyPageSideBar';
 import axios from 'axios';
 import styles from './css/MyPageProductSalesList.module.css';
 import MypagReviewWrite from './MypageReviewWrite';
-import MyPageMemberId from './MyPageMemberId';
+import MypageMemberId from './MyPageMemberId';
+import { useNavigate } from 'react-router-dom';
 
 const MypageProductPurchaseHistory = () => {
   const [memberProductList, setMemberProductList] = useState([]);
   const [showReviewForm, setShowReviewForm] = useState({}); // 리뷰 작성 폼 상태
-  const buyerId = MyPageMemberId(); // 커스텀 훅을 사용
+  const buyerId = MypageMemberId(); // 커스텀 훅을 사용
 
   const readData = async () => {
     if (!buyerId) return; // buyerId가 유효하지 않은 경우 종료
@@ -61,6 +62,12 @@ const MypageProductPurchaseHistory = () => {
     [[], []]
   );
 
+  const hasReview = (product) => product.review != null;
+ 
+  const navigate = useNavigate();
+  const gotoreviewList = () => {
+    navigate('/writedreview');
+  };
   // 구매후기 작성 버튼 클릭 핸들러
   const handleReviewButtonClick = (index) => {
     setShowReviewForm((prev) => ({
@@ -72,7 +79,7 @@ const MypageProductPurchaseHistory = () => {
   return (
     <div>
       <div className={styles.MypageProductSalesListComponent}>
-        <MyPageSideBar />
+        <MypageSideBar />
         <div>
           <h3 className={styles.MypageProductTitle}>최근구매내역 ({reviewWritable.length})</h3>
           {reviewWritable.map((memberProduct, index) => (
@@ -85,25 +92,32 @@ const MypageProductPurchaseHistory = () => {
                   <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
                 </div>
                 <div>
-                  <button
-                    className={styles.reviewWriteButton}
-                    onClick={() => handleReviewButtonClick(index)}
-                  >
-                    구매후기 작성하기
-                  </button>
-                  <p className={styles.reviewWriteText}>작성기한 : {memberProduct.deadline} ({`D-${memberProduct.dDay}`})</p>
+                  {hasReview(memberProduct) ? (
+                    <button className={styles.productOver} onClick={gotoreviewList}>작성한 후기 보기</button>
+                  ) : (
+                    <>
+                      <button
+                        className={styles.reviewWriteButton}
+                        onClick={() => handleReviewButtonClick(index)}
+                      >
+                        구매후기 작성하기
+                      </button>
+                      <p className={styles.reviewWriteText}>작성기한 : {memberProduct.deadline} ({`D-${memberProduct.dDay}`})</p>
+                    </>
+                  )}
                 </div>
+            
               </div>
-              {showReviewForm[index] && <MypagReviewWrite
-                productNo={memberProduct.productNo}
-                buyerId={buyerId}
-                sellerId={memberProduct.memberId}
-              />}
+              {showReviewForm[index] && <MypagReviewWrite 
+               productNo={memberProduct.productNo}
+               buyerId={buyerId}
+               sellerId={memberProduct.memberId}
+               />}
             </div>
           ))}
           <div className={styles.ProductBuyItems}>
-            <h3 className={styles.MypageProductTitle}>구매내역({reviewExpired.length})</h3>
-            {reviewExpired.map((memberProduct, index) => (
+          <h3 className={styles.MypageProductTitle}>구매내역({reviewExpired.length})</h3>
+          {reviewExpired.map((memberProduct, index) => (
               <div key={index} className={styles.MypageProductSalesList}>
                 <img className={styles.ProductSalesimg} src={memberProduct.productImagePath} alt="Product" />
                 <div className={styles.ProductSalestext}>
@@ -112,11 +126,17 @@ const MypageProductPurchaseHistory = () => {
                   <p className={styles.productPrice}>￦{formatPrice(memberProduct.productPrice)}</p>
                 </div>
                 <div>
+                {hasReview(memberProduct) ? (
+                    <button className={styles.productOver}>리뷰 등록 완료</button>
+                  ) : (
+                    <>
                   <button className={styles.productOver}>기한 만료</button>
                   <p className={styles.productText}>작성기한 : {memberProduct.deadline} (기한 초과)</p>
-                </div>
+                  </>
+                  )}
               </div>
-            ))}
+              </div>
+          ))}
           </div>
         </div>
       </div>

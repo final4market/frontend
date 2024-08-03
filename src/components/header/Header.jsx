@@ -87,16 +87,7 @@ export default function Header() {
     navigate(0);
   };
 
-  const handleSearch = () => {
-    navigate(`/search?query=${searchValue}&parentCategoryNo=&categoryNo=`);
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  };
-
+ 
 
   return (
     <>

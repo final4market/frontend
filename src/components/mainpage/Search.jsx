@@ -222,7 +222,7 @@ function SearchBar() {
                 <div className={styles.ProductSalestext}>
                   <p className={styles.searchProductTitle}>{searchProduct.productTitle}</p>
                   <p className={styles.searchProductPrice}>￦{formatPrice(searchProduct.productPrice)}</p>
-                  <p className={styles.searchProductCount}>조회수{searchProduct.productCount}</p>
+                  <p className={styles.searchProductCount}> 조회수{searchProduct.productCount}  좋아요{searchProduct.productLike}</p>
                 </div>
               </div>
           

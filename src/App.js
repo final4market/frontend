@@ -11,19 +11,19 @@ import RegisterSuccess from './components/auth/Register/RegisterSuccess';
 import NaverAuthCallback from './components/auth/Login/NaverAuthCallback';
 import KakaoAuthCallback from './components/auth/Login/KakaoAuthCallback';
 import ProductRegistration from './components/productRegistration/ProductRegistration';
-import MypageProductSalesList from './components/myPage/MyPageProductSalesList';
-import MypageProductPurchaseHistory from './components/myPage/MyPageProductPurchaseHistory';
-import MyPageMyInfo from './components/myPage/MyPageMyInfo';
-import MyPageMyStore from './components/myPage/MyPageMyStore';
-import MyPageInterestProduct from './components/myPage/MyPageInterestProduct';
-import MyPageReceivedReview from './components/myPage/MyPageReceivedReview';
+import MypageProductSalesList from './components/mypage/MyPageProductSalesList';
+import MypageProductPurchaseHistory from './components/mypage/MyPageProductPurchaseHistory';
+import MyPageMyInfo from './components/mypage/MyPageMyInfo';
+import MyPageMyStore from './components/mypage/MyPageMyStore';
+import MyPageInterestProduct from './components/mypage/MyPageInterestProduct';
+import MyPageReceivedReview from './components/mypage/MyPageReceivedReview';
 import SubMain from './components/subPage/SubMain';
 import RoleProtectedRoute from './components/auth/RoleProtectedRoute';
 import './services/AxiosSetup';
 import { AuthProvider } from './services/AuthContext';
 import {MainPage} from'./components/mainpage/MainPage';
 import SearchBar from './components/mainpage/Search';
-import MypageReviewList from './components/myPage/MypageReviewList';
+import MypageReviewList from './components/mypage/MypageReviewList';
 import ProductRegistrationUpdate from './components/productRegistration/ProductRegistrationUpdate';
 
 function App() {
