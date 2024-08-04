@@ -30,7 +30,7 @@ export default function MyPageInterestProduct() {
 
   return (
     <div className={styles.interest_product_header_container}>
-      {/* <Header/> */}
+      <Header/>
       <div className={styles.interest_product_side_container}>
         <MyPageSideBar/>
         <div className={styles.interest_product_main_container}>
@@ -45,7 +45,7 @@ export default function MyPageInterestProduct() {
                     alt="상품 이미지"
                   />
                   <div className={styles.interest_product_title}>
-                    <h3>{data.productTitle}</h3>
+                    {data.productTitle}
                   </div>
                   <div className={styles.interest_product_price}>
                     {formatPrice(data.productPrice)}원
@@ -60,7 +60,6 @@ export default function MyPageInterestProduct() {
             )}
           </div>
         </div>
-        <div className={styles.interest_product_banner}>배너</div>
       </div>
     </div>
   );

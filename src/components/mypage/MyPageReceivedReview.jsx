@@ -4,13 +4,16 @@ import axios from "axios";
 import Header from "../header/Header";
 import MyPageMemberId from "./MyPageMemberId";
 import MyPageSideBar from "./MyPageSideBar";
-import styles from "./css/MyPageReceivedReview.module.css";
 import MyPageStarScore from "./MyPageStarScore";
+import styles from "./css/MyPageReceivedReview.module.css";
 
 export default function MyPageReceivedReview() {
+  const [myProfile, setMyProfile] = useState([]);
   const [myReceivedReview, setMyReceivedReview] = useState([]);
 
   const memberId = MyPageMemberId();
+
+  const defaultProfileImage = "/img/myPage/default_profile_image.png";
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ko-KR').format(price);
@@ -20,6 +23,9 @@ export default function MyPageReceivedReview() {
     if (memberId) {
       const receivedReviewData = async () => {
         try {
+          const profileResponse = await axios.get(`http://localhost:9999/api/member/myPageProfile/${memberId}`);
+          setMyProfile(profileResponse.data);
+
           const receivedReviewResponse = await axios.get(`http://localhost:9999/api/product/myPageReceivedReview/${memberId}`);
           setMyReceivedReview(receivedReviewResponse.data);
         } catch (error) {
@@ -32,15 +38,29 @@ export default function MyPageReceivedReview() {
 
   return (
     <div className={styles.received_review_header_container}>
-      {/* <Header/> */}
+      <Header/>
       <div className={styles.received_review_side_container}>
         <MyPageSideBar/>
         <div className={styles.received_review_main_container}>
-          <div className={styles.my_received_review}>받은 후기</div>
+          {myProfile.map((data, idx) => (
+            <div className={styles.received_review_profile_container} key={idx}>
+              <img
+                className={styles.received_review_profile_image}
+                src={data.memberProfilePath ? data.memberProfilePath : defaultProfileImage}
+                alt="프로필 이미지"
+              />
+              <div className={styles.received_review_profile_info}>
+                <span>{data.memberNick || data.memberId}</span>
+                <span>님의 받은 후기 | 평점:</span>
+                <span className={styles.received_review_avg_score}>★</span>
+                {data.memberScore}
+              </div>
+            </div>
+          ))}
           <div className={styles.received_review_nav_container}>
             <ul className={styles.received_review_nav_ul}>
               <li className={styles.received_review_nav_li}>
-                <Link to="/myStore" className={styles.received_review_nav_item}>상품</Link>
+                <Link to="/myStore" className={styles.received_review_nav_item}>상점</Link>
               </li>
               <li className={styles.received_review_nav_li}>
                 <Link to="/receivedReview" className={styles.received_review_nav_item}>후기</Link>
@@ -59,20 +79,20 @@ export default function MyPageReceivedReview() {
                     src={data.productImagePath}
                     alt="상품 이미지"
                   />
-                  <div>
-                    <div className={styles.received_review_item}>
-                      <h4>{data.productTitle}</h4>
+                  <div className={styles.received_review_container3}>
+                    <div className={styles.received_review_product_title}>
+                      {data.productTitle}
                     </div>
-                    <div className={styles.received_review_item}>
+                    <div className={styles.received_review_product_price}>
                       {formatPrice(data.productPrice)}원
                     </div>
-                    <div className={styles.received_review_item}>
-                      {data.buyerNick}, {data.reviewDate}
+                    <div className={styles.received_review_buyer}>
+                      {data.buyerNick || data.buyerId}, {data.reviewDate}
                     </div>
-                    <div className={styles.received_review_item}>
+                    <div className={styles.received_review_score}>
                       <MyPageStarScore score={data.reviewScore}/>
                     </div>
-                    <div className={styles.received_review_item}>
+                    <div className={styles.received_review_content}>
                       {data.review}
                     </div>
                   </div>
@@ -83,7 +103,6 @@ export default function MyPageReceivedReview() {
             )}
           </div>
         </div>
-        <div className={styles.received_review_banner}>배너</div>
       </div>
     </div>
   );

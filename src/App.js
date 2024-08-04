@@ -17,6 +17,7 @@ import MyPageMyInfo from './components/myPage/MyPageMyInfo';
 import MyPageMyStore from './components/myPage/MyPageMyStore';
 import MyPageInterestProduct from './components/myPage/MyPageInterestProduct';
 import MyPageReceivedReview from './components/myPage/MyPageReceivedReview';
+import MyPageFollowList from './components/myPage/MyPageFollowList';
 import SubMain from './components/subPage/SubMain';
 import RoleProtectedRoute from './components/auth/RoleProtectedRoute';
 import './services/AxiosSetup';
@@ -25,6 +26,7 @@ import {MainPage} from'./components/mainpage/MainPage';
 import SearchBar from './components/mainpage/Search';
 import MyPageReviewList from './components/myPage/MyPageReviewList';
 import ProductRegistrationUpdate from './components/productRegistration/ProductRegistrationUpdate';
+import SellerPageSellerStore from './components/sellerPage/SellerPageSellerStore';
 
 function App() {
 
@@ -42,7 +44,8 @@ function App() {
           <Route path="/kakaoAuthCallback" element={<KakaoAuthCallback/>}/>
           <Route path="/productPage" element={<SubMain/>}/>  
           <Route path="/search" element={<SearchBar/>}/>     
-          <Route path="/productMainPage" element={<MainPage/>}/>    
+          <Route path="/productMainPage" element={<MainPage/>}/>
+          <Route path="/sellerStore" element={<SellerPageSellerStore/>}/>
           <Route element={<RoleProtectedRoute requiredRole="ROLE_USER"/>}>
             <Route path="/myStore" element={<MyPageMyStore/>}/>
             <Route path="/myInfo" element={<MyPageMyInfo/>}/>
@@ -50,9 +53,10 @@ function App() {
             <Route path="/productRegisterUpdate/:productNo" element={<ProductRegistrationUpdate/>}/>
             <Route path="/sellHistory" element={<MyPageProductSalesList/>}/>       
             <Route path="/buyHistory" element={<MyPageProductPurchaseHistory/>}/>   
-            <Route path="/writedReview" element={<MyPageReviewList/>}/>  
+            <Route path="/wroteReview" element={<MyPageReviewList/>}/>  
             <Route path="/interestProduct" element={<MyPageInterestProduct/>}/>
             <Route path="/receivedReview" element={<MyPageReceivedReview/>}/>
+            <Route path="/followList" element={<MyPageFollowList/>}/>
           </Route>          
           <Route element={<RoleProtectedRoute requiredRole="ROLE_ADMIN"/>}>
             <Route path="/admin" element={<Navigate to="/admin/reports"/>}/>

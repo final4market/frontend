@@ -11,7 +11,8 @@ export default function MyPageMyStore() {
   const [myProduct, setMyProduct] = useState([]);
 
   const memberId = MyPageMemberId();
-  const defaultProfileImage = "/img/mypage/profile.png";
+
+  const defaultProfileImage = "/img/myPage/default_profile_image.png";
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ko-KR').format(price);
@@ -36,40 +37,29 @@ export default function MyPageMyStore() {
 
   return (
     <div className={styles.my_store_header_container}>
-      {/* <Header/> */}
+      <Header/>
       <div className={styles.my_store_side_container}>
         <MyPageSideBar/>
         <div className={styles.my_store_main_container}>
-            {myProfile.map((data, idx) => (
-              <div className={styles.my_store_profile_container} key={idx}>
-                <img
-                  className={styles.my_store_profile_image}
-                  src={data.memberProfilePath ? data.memberProfilePath : defaultProfileImage}
-                  alt="프로필 이미지"
-                />
-                <div className={styles.my_store_profile_info}>
-                  {data.memberNick ? (
-                    <>
-                      {data.memberNick}
-                      <span>| 평점:</span>
-                      <span className={styles.my_store_score}>★</span>
-                      {data.memberScore}
-                    </>
-                  ) : (
-                    <>
-                      <span className={styles.my_store_no_nick}>내 정보에서 닉네임을 설정하세요.</span>
-                      <span>| 평점:</span>
-                      <span className={styles.my_store_score}>★</span>
-                      {data.memberScore}
-                    </>
-                  )}
-                </div>
+          {myProfile.map((data, idx) => (
+            <div className={styles.my_store_profile_container} key={idx}>
+              <img
+                className={styles.my_store_profile_image}
+                src={data.memberProfilePath ? data.memberProfilePath : defaultProfileImage}
+                alt="프로필 이미지"
+              />
+              <div className={styles.my_store_profile_info}>
+                <span>{data.memberNick || data.memberId}</span>
+                <span>님의 상점 | 평점:</span>
+                <span className={styles.my_store_avg_score}>★</span>
+                {data.memberScore}
               </div>
-            ))}
+            </div>
+          ))}
           <div className={styles.my_store_nav_container}>
             <ul className={styles.my_store_nav_ul}>
               <li className={styles.my_store_nav_li}>
-                <Link to="/myStore" className={styles.my_store_nav_item}>상품</Link>
+                <Link to="/myStore" className={styles.my_store_nav_item}>상점</Link>
               </li>
               <li className={styles.my_store_nav_li}>
                 <Link to="/receivedReview" className={styles.my_store_nav_item}>후기</Link>
@@ -89,7 +79,7 @@ export default function MyPageMyStore() {
                     alt="상품 이미지"
                   />
                   <div className={styles.my_store_product_title}>
-                    <h3>{data.productTitle}</h3>
+                    {data.productTitle}
                   </div>
                   <div className={styles.my_store_product_price}>
                     {formatPrice(data.productPrice)}원
@@ -104,7 +94,6 @@ export default function MyPageMyStore() {
             )}
           </div>
         </div>
-        <div className={styles.my_store_banner}>배너</div>
       </div>
     </div>
   );

@@ -11,12 +11,12 @@
 
 .interest_product {
   display: flex;
-  font-size: 24px;
-  padding: 20px 0px;
+  font-size: 32px;
+  margin: 20px 0px;
 }
 
 .interest_product_container {
-  width: 700px;
+  width: 900px;
   display: flex;
   flex-flow: row wrap;
   margin: 20px 0px;
@@ -24,17 +24,24 @@
 
 .interest_product_list {
   width: 300px;
+  height: auto;
   display: flex;
   flex-flow: column nowrap;
   border: 1px solid #CCCCCC;
   margin: 10px;
   padding: 10px;
   font-size: 24px;
+  box-sizing: border-box;
 }
 
 .interest_product_image {
   width: 100%;
   height: 200px;
+  margin-bottom: 10px;
+}
+
+.interest_product_title {
+  font-size: 24px;
 }
 
 .interest_product_detail {
@@ -44,15 +51,8 @@
 }
 
 .interest_product_nothing {
-  width: 700px;
+  width: 900px;
   font-size: 48px;
   text-align: center;
   margin: 100px 0px;
-}
-
-.interest_product_banner {
-  width: 200px;
-  border: 1px solid black;
-  text-align: center;
-  margin: 20px 50px;
 }

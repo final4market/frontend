@@ -27,7 +27,7 @@ export default function MyPageMyInfo() {
   });
 
   const memberId = MyPageMemberId();
-  const defaultProfileImage = "/img/mypage/profile.png";
+  const defaultProfileImage = "/img/myPage/default_profile_image.png";
 
   useEffect(() => {
     if (memberId) {
@@ -108,7 +108,7 @@ export default function MyPageMyInfo() {
 
   return (
     <div className={styles.my_info_header_container}>
-      {/* <Header/> */}
+      <Header/>
       <div className={styles.my_info_side_container}>
         <MyPageSideBar/>
         <div className={styles.my_info_container}>
@@ -120,6 +120,7 @@ export default function MyPageMyInfo() {
                   <div className={styles.my_info_content}>프로필
                     <div className={styles.my_info_profile_container1}>
                       <img
+                        className={styles.my_info_profile_image}
                         src={data.memberinfoPath ? data.memberProfilePath : defaultProfileImage}
                         alt="프로필 이미지"
                       />
@@ -195,13 +196,9 @@ export default function MyPageMyInfo() {
               <div className={styles.my_info_button_container2}>
                 <button className={styles.my_info_update_button} type="submit">수정하기</button>
               </div>
-              <div className={styles.my_info_button_container2}>
-                <button className={styles.my_info_withdrawal_button} type="button">탈퇴하기</button>
-              </div>
             </form>
           </div>
         </div>
-        <div className={styles.my_info_banner}>배너</div>
       </div>
     </div>
   );

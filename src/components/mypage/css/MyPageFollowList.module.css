@@ -1,15 +1,15 @@
-.my_store_header_container {
+.follow_list_header_container {
   width: 1440px;
   display: flex;
   flex-flow: column wrap;
   margin: 0px auto;
 }
 
-.my_store_side_container {
+.follow_list_side_container {
   display: flex;
 }
 
-.my_store_profile_container {
+.follow_list_profile_container {
   width: 900px;
   height: auto;
   display: flex;
@@ -19,7 +19,7 @@
   margin: 20px 0px;
 }
 
-.my_store_profile_image {
+.follow_list_profile_image {
   width: 48px;
   height: 48px;
   border: 1px solid black;
@@ -27,12 +27,12 @@
   margin-right: 5px;
 }
 
-.my_store_avg_score {
+.follow_list_avg_score {
   color: #FFD700;
   margin: 5px;
 }
 
-.my_store_nav_container .my_store_nav_ul {
+.follow_list_nav_container .follow_list_nav_ul {
   width: 900px;
   display: flex;
   flex-flow: row nowrap;
@@ -41,53 +41,49 @@
   padding: 0px;
 }
 
-.my_store_nav_container .my_store_nav_ul .my_store_nav_li {
+.follow_list_nav_container .follow_list_nav_ul .follow_list_nav_li {
   width: 200px;
   border-bottom: 1px solid black;
   list-style-type: none;
   text-align: center;
 }
 
-.my_store_nav_container .my_store_nav_ul .my_store_nav_li:hover {
+.follow_list_nav_container .follow_list_nav_ul .follow_list_nav_li:hover {
   border-bottom: 1px solid red;
 }
 
-.my_store_nav_container .my_store_nav_ul .my_store_nav_li .my_store_nav_item {
+.follow_list_nav_container .follow_list_nav_ul .follow_list_nav_li .follow_list_nav_item {
   color: black;
   text-decoration: none;
 }
 
-.my_store_product_container {
-  width: 900px;
+.follow_list_container {
   display: flex;
   flex-flow: row wrap;
-  margin: 20px 0px;
 }
 
-.my_store_product_list {
-  width: calc((100% - 60px) / 3);
+.follow_list_container2 {
+  width: calc((100% - 80px) / 4);
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
   border: 1px solid #CCCCCC;
   margin: 10px;
   padding: 10px;
-  font-size: 24px;
+  font-size: 16px;
 }
 
-.my_store_product_image {
-  width: 100%;
-  height: 200px;
+.follow_list_seller_profile_image {
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 50%;
   margin-bottom: 10px;
 }
 
-.my_store_product_detail {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: right;
-}
 
-.my_store_nothing {
-  width: 900px;
+.follow_list_nothing {
+  width: 700px;
   font-size: 48px;
   text-align: center;
   margin: 100px 0px;
