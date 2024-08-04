@@ -33,6 +33,9 @@ function SearchBar() {
 
   const prevFormDataRef = useRef(formData);
 
+  // 새로 추가된 부분: 검색 버튼 클릭 및 엔터 키 입력 처리
+
+
   useEffect(() => {
     const queryParam = query.get('query') || '';
     const parentCategoryNo = query.get('parentCategoryNo') || '';
@@ -96,6 +99,15 @@ function SearchBar() {
     }));
   };
 
+  const handleCloseCategory = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      parentCategoryNo: '',
+      categoryNo: ''
+    }));
+    sendSearchOption();
+  };
+
   const handleParentChange = (parentCategoryNo) => {
     console.log('Selected parent category number:', parentCategoryNo);
     setFormData(prevState => ({
@@ -137,9 +149,16 @@ function SearchBar() {
       <div className={styles.searchContainer}>
         <h1 className={styles.searchTitle}>'{searchQuery}' 검색결과 ({searchResultproductList.length})</h1>
         <div className={styles.searchCategory}>
-          <button onClick={toggleCategorySelector}>
-            {isCategorySelectorVisible ? '카테고리 - ' : '카테고리 + '}
-          </button>
+        <button onClick={toggleCategorySelector}>
+  {isCategorySelectorVisible ? (
+    <>
+    
+      <button onClick={handleCloseCategory}>카테고리 -</button>
+    </>
+  ) : (
+    '카테고리 + '
+  )}
+</button>
           {isCategorySelectorVisible && (
             <CategorySelector 
               onCategoryChange={handleCategoryChange}
