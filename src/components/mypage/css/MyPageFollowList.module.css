@@ -1,16 +1,15 @@
-.follow_list_header_container {
-  width: 1440px;
+.follow_list_side_container {
+  width: 1000px;
   display: flex;
-  flex-flow: column wrap;
   margin: 0px auto;
 }
 
-.follow_list_side_container {
-  display: flex;
+.follow_list_main_container {
+  width: 70%;
 }
 
 .follow_list_profile_container {
-  width: 900px;
+  width: 100%;
   height: auto;
   display: flex;
   flex-flow: row nowrap;
@@ -33,7 +32,7 @@
 }
 
 .follow_list_nav_container .follow_list_nav_ul {
-  width: 900px;
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -68,9 +67,9 @@
   flex-flow: column nowrap;
   align-items: center;
   border: 1px solid #CCCCCC;
+  font-size: 16px;
   margin: 10px;
   padding: 10px;
-  font-size: 16px;
 }
 
 .follow_list_seller_profile_image {
@@ -80,7 +79,6 @@
   border-radius: 50%;
   margin-bottom: 10px;
 }
-
 
 .follow_list_nothing {
   width: 700px;

@@ -1,16 +1,15 @@
-.received_review_header_container {
-  width: 1440px;
+.received_review_side_container {
+  width: 1000px;
   display: flex;
-  flex-flow: column wrap;
   margin: 0px auto;
 }
 
-.received_review_side_container {
-  display: flex;
+.received_review_main_container {
+  width: 70%;
 }
 
 .received_review_profile_container {
-  width: 900px;
+  width: 100%;
   height: auto;
   display: flex;
   flex-flow: row nowrap;
@@ -33,7 +32,7 @@
 }
 
 .received_review_nav_container .received_review_nav_ul {
-  width: 900px;
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -58,7 +57,7 @@
 }
 
 .received_review_container {
-  width: 900px;
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -67,26 +66,28 @@
   width: calc((100% - 20px));
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
   border: 1px solid #CCCCCC;
+  font-size: 16px;
   margin: 10px;
   padding: 10px;
-  font-size: 16px;
   box-sizing: border-box;
 }
 
 .received_review_product_image {
   width: 150px;
   height: 150px;
+  border: 1px solid #CCCCCC;
+  border-radius: 10px;
   margin-right: 10px;
 }
 
-.received_review_container3 {
-  font-size: 24px;
+.received_review_product_price {
+  font-weight: bold;
 }
 
-
 .received_review_nothing {
-  width: 900px;
+  width: 100%;
   font-size: 48px;
   text-align: center;
   margin: 100px 0px;

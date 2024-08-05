@@ -76,7 +76,7 @@ export default function SellerPageSellerStore() {
                     alt="상품 이미지"
                   />
                   <div className={styles.seller_store_product_title}>
-                    <h3>{data.productTitle}</h3>
+                    {data.productTitle}
                   </div>
                   <div className={styles.seller_store_product_price}>
                     {formatPrice(data.productPrice)}원

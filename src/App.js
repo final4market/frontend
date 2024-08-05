@@ -27,6 +27,8 @@ import SearchBar from './components/mainpage/Search';
 import MyPageReviewList from './components/myPage/MyPageReviewList';
 import ProductRegistrationUpdate from './components/productRegistration/ProductRegistrationUpdate';
 import SellerPageSellerStore from './components/sellerPage/SellerPageSellerStore';
+import SellerPageReceivedReview from './components/sellerPage/SellerPageReceivedReview';
+import SellerPageFollowList from './components/sellerPage/SellerPageFollowList';
 
 function App() {
 
@@ -46,6 +48,8 @@ function App() {
           <Route path="/search" element={<SearchBar/>}/>     
           <Route path="/productMainPage" element={<MainPage/>}/>
           <Route path="/sellerStore" element={<SellerPageSellerStore/>}/>
+          <Route path="/sellerReceivedReview" element={<SellerPageReceivedReview/>}/>
+          <Route path="/sellerFollowList" element={<SellerPageFollowList/>}/>
           <Route element={<RoleProtectedRoute requiredRole="ROLE_USER"/>}>
             <Route path="/myStore" element={<MyPageMyStore/>}/>
             <Route path="/myInfo" element={<MyPageMyInfo/>}/>

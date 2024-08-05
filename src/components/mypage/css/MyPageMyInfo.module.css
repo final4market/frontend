@@ -1,12 +1,11 @@
-.my_info_header_container {
-  width: 1440px;
+.my_info_side_container {
+  width: 1000px;
   display: flex;
-  flex-flow: column wrap;
   margin: 0px auto;
 }
 
-.my_info_side_container {
-  display: flex;
+.my_info_main_container {
+  width: 70%;
 }
 
 .my_infomation {
@@ -15,7 +14,7 @@
 }
 
 .my_info_main_container {
-  width: 900px;
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -52,7 +51,6 @@
 .my_info_asterisk {
   color: red;
 }
-
 
 .my_info_register_button {
   width: 50px;
