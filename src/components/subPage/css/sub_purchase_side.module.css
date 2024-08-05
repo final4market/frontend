@@ -172,6 +172,7 @@
   transform: translateX(100%);
   opacity: 0;
   box-sizing: border-box;
+  font-size: 20px;
 }
 
 
@@ -318,7 +319,7 @@
   width: 50px;
   padding: 5px 0px;
   text-align: center;
-  font-size: 10px;
+  font-size: 14px;
   left: 90px;
   border: 1px solid green;
   color: green;
