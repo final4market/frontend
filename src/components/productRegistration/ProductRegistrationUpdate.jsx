@@ -197,7 +197,7 @@ export default function ProductRegistrationUpdate() {
         });
 
         if (deleteImages.length > 0) {
-            await axios.delete(`http://localhost:9999/product/deleteImage/${productNo}/${deleteImages.join(',')}`);
+            await axios.put(`http://localhost:9999/product/deleteImage/${productNo}/${deleteImages.join(',')}`);
         }
 
         try {
@@ -212,9 +212,9 @@ export default function ProductRegistrationUpdate() {
             setPopup({
                 show: true,
                 message: response.data.msg,
-                isConfirmation: false,
+                isConfirmation: true, // Show confirmation button
+                onConfirm: () => navigate('/sellHistory'), // Navigate on confirmation
             });
-            navigate('/sellHistory');
         } catch (error) {
             console.error('상품 등록/수정에 실패했습니다:', error);
             setPopup({
@@ -355,6 +355,7 @@ export default function ProductRegistrationUpdate() {
                     onClose={() => setPopup({ ...popup, show: false })}
                     message={popup.message}
                     isConfirmation={popup.isConfirmation}
+                    onConfirm={popup.onConfirm} // Pass onConfirm function
                 />
             </div>
         </div>
