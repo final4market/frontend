@@ -18,10 +18,14 @@ const ProductImageUploadUpdate = ({ uploadedImages, setUploadedImages, productNo
             if (productNo) {
                 try {
                     const response = await axios.get(`http://localhost:9999/api/product/${productNo}/images`);
+                    console.log(response.data);
+
+                    // 데이터를 preview 형식으로 변환
                     const existingImages = response.data.map(image => ({
-                        src: image.productImagePath,
-                        key: image.PRODUCT_IMAGE_NO, // PRODUCT_IMAGE_NO를 key로 사용
+                        src: image.productImagePath, // productImagePath를 src로 설정
+                        key: image.productImageNo // productImageNo를 key로 설정
                     }));
+
                     setImagePreviews(existingImages);
                 } catch (error) {
                     console.error('Error fetching existing images:', error);
@@ -74,12 +78,12 @@ const ProductImageUploadUpdate = ({ uploadedImages, setUploadedImages, productNo
                 });
 
                 // 새로운 이미지 추가
-                newUploadedImages.push({ key: objectKey, file: file });
+                newUploadedImages.push({ key: objectKey, file: file, number: imagePreviews.length + i });
 
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     setImagePreviews(prev => [
-                        ...prev, 
+                        ...prev,
                         { src: reader.result, key: objectKey } // `key`는 `PRODUCT_IMAGE_NO`처럼 사용
                     ]);
                 };
@@ -102,7 +106,6 @@ const ProductImageUploadUpdate = ({ uploadedImages, setUploadedImages, productNo
         setImagePreviews(prev => prev.filter(image => image.key !== key));
         setUploadedImages(prev => prev.filter(image => image.key !== key));
         setDeleteImages(prev => [...prev, key]); // 삭제 이미지 배열에 key 추가
-        
     };
 
     return (

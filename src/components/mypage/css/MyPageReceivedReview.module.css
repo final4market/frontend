@@ -1,7 +1,7 @@
 .received_review_side_container {
   width: 1000px;
   display: flex;
-  margin: 0px auto;
+  margin: 200px auto;
 }
 
 .received_review_main_container {
@@ -60,6 +60,7 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
+  margin: 20px 0px;
 }
 
 .received_review_container2 {

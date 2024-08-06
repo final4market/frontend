@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import Header from "../header/Header";
 import MyPageMemberId from "./MyPageMemberId";
@@ -30,20 +31,22 @@ export default function MyPageInterestProduct() {
 
   return (
     <div className={styles.interest_product_header_container}>
-      <Header/>
+      <Header />
       <div className={styles.interest_product_side_container}>
-        <MyPageSideBar/>
+        <MyPageSideBar />
         <div className={styles.interest_product_main_container}>
           <div className={styles.interest_product}>관심 상품</div>
           <div className={styles.interest_product_container}>
             {interestProduct.length > 0 ? (
               interestProduct.map((data, idx) => (
                 <div className={styles.interest_product_list} key={idx} >
-                  <img
-                    className={styles.interest_product_image}
-                    src={data.productImagePath}
-                    alt="상품 이미지"
-                  />
+                  <Link to={`/productPage/${data.productNo}`}>
+                    <img
+                      className={styles.interest_product_image}
+                      src={data.productImagePath}
+                      alt="상품 이미지"
+                    />
+                  </Link>
                   <div className={styles.interest_product_title}>
                     {data.productTitle}
                   </div>

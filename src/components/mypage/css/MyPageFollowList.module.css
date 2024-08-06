@@ -1,7 +1,7 @@
 .follow_list_side_container {
   width: 1000px;
   display: flex;
-  margin: 0px auto;
+  margin: 200px auto;
 }
 
 .follow_list_main_container {
@@ -59,6 +59,7 @@
 .follow_list_container {
   display: flex;
   flex-flow: row wrap;
+  margin: 20px 0px;
 }
 
 .follow_list_container2 {
@@ -66,10 +67,10 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  border: 1px solid #CCCCCC;
   font-size: 16px;
   margin: 10px;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 .follow_list_seller_profile_image {

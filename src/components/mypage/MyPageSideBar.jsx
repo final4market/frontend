@@ -23,7 +23,7 @@ export default function MyPageSideBar() {
           <Link to="/sellHistory" className={`${styles.side_bar_item} ${styles.side_bar_sell_history}`}>판매 내역</Link>
         </li>
         <li className={styles.side_bar_li}>
-          <Link to="/wroteReview" className={`${styles.side_bar_item} ${styles.side_bar_wrote_review}`}>작성 후기</Link>
+          <Link to="/writedReview" className={`${styles.side_bar_item} ${styles.side_bar_wrote_review}`}>작성 후기</Link>
         </li>
         <li className={styles.side_bar_li}>
           <Link to="/receivedReview" className={`${styles.side_bar_item} ${styles.side_bar_received_review}`}>받은 후기</Link>

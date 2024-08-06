@@ -6,17 +6,18 @@ import ProductImageUpload from './ProductImageUpload';
 import ProductDeliveryOptions from './ProductDeliveryOptions';
 import ProductTradeArea from './ProductTradeArea';
 import CategorySelector from './CategorySelector';
-import ProductMemberId from './ProductMemberId'; // 커스텀 훅을 import
-import { useParams } from 'react-router-dom'; // useParams 훅을 import
+import ProductMemberId from './ProductMemberId';
+import { useParams, useNavigate } from 'react-router-dom';
+import Header from '../header/Header';
 
 export default function ProductRegistrationUpdate() {
-    const { productNo } = useParams(); // URL 파라미터에서 productNo를 읽어옴
+    const { productNo } = useParams();
     const productTitle = useRef();
     const productContent = useRef();
     const productPrice = useRef();
     const deliveryCharge = useRef();
     const [ProductCategoryList, setProductCategoryList] = useState([]);
-    const memberId = ProductMemberId(); // 커스텀 훅을 사용
+    const memberId = ProductMemberId();
     const [uploadedImages, setUploadedImages] = useState([]);
     const [formData, setFormData] = useState({
         productTitle: '',
@@ -31,6 +32,7 @@ export default function ProductRegistrationUpdate() {
 
     const [parentNumberOptions, setParentNumberOptions] = useState([]);
     const [parentNumber, setParentNumber] = useState('1');
+    const navigate = useNavigate();
 
     const [errors, setErrors] = useState({
         productTitle: '',
@@ -47,7 +49,6 @@ export default function ProductRegistrationUpdate() {
         isConfirmation: false,
     });
 
-    // 카테고리 목록을 가져오는 useEffect
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -60,7 +61,6 @@ export default function ProductRegistrationUpdate() {
         fetchData();
     }, []);
 
-    // 부모 카테고리에 따라 자식 카테고리를 가져오는 useEffect
     useEffect(() => {
         const readData = async () => {
             try {
@@ -73,15 +73,15 @@ export default function ProductRegistrationUpdate() {
         readData();
     }, [parentNumber]);
 
-    // 제품 번호가 있을 경우 기존 제품 정보를 가져오는 useEffect
     useEffect(() => {
-      console.log("productNo:", productNo);
         if (productNo) {
             const fetchProductData = async () => {
                 try {
                     const response = await axios.get(`http://localhost:9999/api/product/update/view/${productNo}`);
-                    setFormData(response.data);
-                    console.log(response.data);
+                    setFormData({
+                        ...response.data,
+                        productPrice: formatPrice(response.data.productPrice)
+                    });
                 } catch (error) {
                     console.error('제품 정보를 가져오는 데 오류가 발생했습니다:', error);
                 }
@@ -90,13 +90,28 @@ export default function ProductRegistrationUpdate() {
         }
     }, [productNo]);
 
-    // 폼 데이터 변경 핸들러
+    const formatPrice = (price) => {
+        if (!price) return '';
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
+
+        if (name === 'productPrice') {
+            const rawValue = value.replace(/[^\d]/g, '');
+            const formattedValue = formatPrice(rawValue);
+
+            setFormData({
+                ...formData,
+                [name]: formattedValue,
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
     };
 
     const [deliveryTransaction, setDeliveryTransaction] = useState(false);
@@ -109,7 +124,6 @@ export default function ProductRegistrationUpdate() {
         }));
     }, [deliveryTransaction]);
 
-    // 폼 유효성 검사
     const validateForm = () => {
         let valid = true;
         const newErrors = {
@@ -150,7 +164,6 @@ export default function ProductRegistrationUpdate() {
         return valid;
     };
 
-    // 폼 제출 핸들러
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -160,7 +173,7 @@ export default function ProductRegistrationUpdate() {
 
         const formDataToSend = new FormData();
         formDataToSend.append('productTitle', formData.productTitle);
-        formDataToSend.append('productPrice', formData.productPrice);
+        formDataToSend.append('productPrice', formData.productPrice.replace(/,/g, ''));
         formDataToSend.append('categoryNo', formData.categoryNo);
         formDataToSend.append('productContent', productContent.current.value);
         formDataToSend.append('productStatus', formData.productStatus);
@@ -170,13 +183,8 @@ export default function ProductRegistrationUpdate() {
         formDataToSend.append('memberId', memberId);
 
         uploadedImages.forEach((image, index) => {
-            formDataToSend.append(`imageKey${index}`, image.key); // 이미지 키를 폼 데이터에 추가
-            console.log(`imageKey${index}:`, image.key);
+            formDataToSend.append(`imageKey${index}`, image.key);
         });
-
-        const handleImageUpload = (images) => {
-            setUploadedImages(images);
-        };
 
         const fileInputs = document.querySelectorAll('input[type="file"]');
         fileInputs.forEach((fileInput) => {
@@ -198,7 +206,8 @@ export default function ProductRegistrationUpdate() {
             setPopup({
                 show: true,
                 message: response.data.msg,
-                isConfirmation: false,
+                isConfirmation: true,
+                onConfirm: () => navigate('/sellHistory'), // Correctly navigate on confirmation
             });
         } catch (error) {
             console.error('상품 등록/수정에 실패했습니다:', error);
@@ -211,133 +220,136 @@ export default function ProductRegistrationUpdate() {
     };
 
     return (
-        <div className={styles.productContainer}>
-            <form onSubmit={handleSubmit}>
-            <ProductImageUpload
-                       uploadedImages={uploadedImages}
-                       setUploadedImages={setUploadedImages}
-
-                    productNo={productNo}
-                />
-                <div className={styles.productHeader}>
-                    <input
-                        type="text"
-                        ref={productTitle}
-                        name="productTitle"
-                        placeholder="상품명"
-                        className={styles.productName}
-                        onChange={handleChange}
-                        value={formData.productTitle}
+        <div>
+            <Header />
+            <div className={styles.productContainer}>
+                <form onSubmit={handleSubmit}>
+                    <ProductImageUpload
+                        uploadedImages={uploadedImages}
+                        setUploadedImages={setUploadedImages}
+                        productNo={productNo}
                     />
-                    {errors.productTitle && <div className={`${styles.error} ${styles.red}`}>{errors.productTitle}</div>}
-                    <div className={styles.priceContainer}>
+                    <div className={styles.productHeader}>
                         <input
                             type="text"
-                            name="productPrice"
-                            ref={productPrice}
+                            ref={productTitle}
+                            name="productTitle"
+                            placeholder="상품명"
+                            className={styles.productName}
                             onChange={handleChange}
-                            value={formData.productPrice === '0' ? '0' : formData.productPrice}
-                            placeholder="₩판매가격"
-                            className={styles.priceInput}
+                            value={formData.productTitle}
                         />
-                        <div className={styles.freeCheckbox}>
-                            <label htmlFor="free">
-                                <input
-                                    type="checkbox"
-                                    id="free"
-                                    name="priceFree"
-                                    checked={formData.productPrice === '0'}
-                                    onChange={(e) => handleChange({ target: { name: 'productPrice', value: e.target.checked ? '0' : '' } })}
-                                />
-                                무료나눔
-                            </label>
+                        {errors.productTitle && <div className={`${styles.error} ${styles.red}`}>{errors.productTitle}</div>}
+                        <div className={styles.priceContainer}>
+                            <input
+                                type="text"
+                                name="productPrice"
+                                ref={productPrice}
+                                onChange={handleChange}
+                                value={formData.productPrice}
+                                placeholder="₩판매가격"
+                                className={styles.priceInput}
+                            />
+                            <div className={styles.freeCheckbox}>
+                                <label htmlFor="free">
+                                    <input
+                                        type="checkbox"
+                                        id="free"
+                                        name="priceFree"
+                                        checked={formData.productPrice === '0'}
+                                        onChange={(e) => handleChange({ target: { name: 'productPrice', value: e.target.checked ? '0' : '' } })}
+                                    />
+                                    무료나눔
+                                </label>
+                            </div>
                         </div>
+                        {errors.productPrice && <div className={`${styles.error} ${styles.red}`}>{errors.productPrice}</div>}
                     </div>
-                    {errors.productPrice && <div className={`${styles.error} ${styles.red}`}>{errors.productPrice}</div>}
-                </div>
 
-                <CategorySelector
-                    onCategoryChange={(value) => setFormData({ ...formData, categoryNo: value })}
-                    onParentChange={(value) => setParentNumber(value)}
-                />
-
-                <div className={styles.productHeader}>
-                    <textarea
-                        name="productContent"
-                        ref={productContent}
-                        placeholder="판매상품 상세 설명
-                        -구매기시 
-                        - 사용 기간
-                        - 하자 여부
-                        * 실제 촬영한 사진과 함께 상세 정보를 입력해주세요.
-                        * 부적절한 게시물 등록시 삭제 및 이용제재 처리될수있어요."
-                        className={styles.description}
-                        onChange={handleChange}
-                        value={formData.productContent}
+                    <CategorySelector
+                        onCategoryChange={(value) => setFormData({ ...formData, categoryNo: value })}
+                        onParentChange={(value) => setParentNumber(value)}
                     />
-                    {errors.productContent && <div className={`${styles.error} ${styles.red}`}>{errors.productContent}</div>}
-                </div>
 
-                <div className={styles.productState}>
-                    <label className={`${styles.productRadioLabel} ${formData.productStatus === '새상품' ? styles.selected : ''}`}>
-                        <input
-                            type="radio"
-                            name="productStatus"
-                            value="새상품"
-                            checked={formData.productStatus === '새상품'}
+                    <div className={styles.productHeader}>
+                        <textarea
+                            name="productContent"
+                            ref={productContent}
+                            placeholder="판매상품 상세 설명
+                            -구매기시 
+                            - 사용 기간
+                            - 하자 여부
+                            * 실제 촬영한 사진과 함께 상세 정보를 입력해주세요.
+                            * 부적절한 게시물 등록시 삭제 및 이용제재 처리될수있어요."
+                            className={styles.description}
                             onChange={handleChange}
+                            value={formData.productContent}
                         />
-                        새상품
-                    </label>
-                    <label className={`${styles.productRadioLabel} ${formData.productStatus === '중고' ? styles.selected : ''}`}>
-                        <input
-                            type="radio"
-                            name="productStatus"
-                            value="중고"
-                            checked={formData.productStatus === '중고'}
-                            onChange={handleChange}
-                        />
-                        중고
-                    </label>
-                    {errors.productStatus && <div className={`${styles.error} ${styles.red}`}>{errors.productStatus}</div>}
-                </div>
+                        {errors.productContent && <div className={`${styles.error} ${styles.red}`}>{errors.productContent}</div>}
+                    </div>
 
-                <div className={styles.ProductTransaction}>
-                    <label>
-                        <input
-                            type='checkbox'
-                            name='deliveryTransaction'
-                            checked={deliveryTransaction}
-                            onChange={(e) => setDeliveryTransaction(e.target.checked)}
-                        />
-                        택배거래
-                    </label>
+                    <div className={styles.productState}>
+                        <label className={`${styles.productRadioLabel} ${formData.productStatus === '새상품' ? styles.selected : ''}`}>
+                            <input
+                                type="radio"
+                                name="productStatus"
+                                value="새상품"
+                                checked={formData.productStatus === '새상품'}
+                                onChange={handleChange}
+                            />
+                            새상품
+                        </label>
+                        <label className={`${styles.productRadioLabel} ${formData.productStatus === '중고' ? styles.selected : ''}`}>
+                            <input
+                                type="radio"
+                                name="productStatus"
+                                value="중고"
+                                checked={formData.productStatus === '중고'}
+                                onChange={handleChange}
+                            />
+                            중고
+                        </label>
+                        {errors.productStatus && <div className={`${styles.error} ${styles.red}`}>{errors.productStatus}</div>}
+                    </div>
 
-                    <label>
-                        <input
-                            type='checkbox'
-                            name='directTransaction'
-                            checked={directTransaction}
-                            onChange={(e) => setDirectTransaction(e.target.checked)}
-                        />
-                        직거래
-                    </label>
-                </div>
+                    <div className={styles.ProductTransaction}>
+                        <label>
+                            <input
+                                type='checkbox'
+                                name='deliveryTransaction'
+                                checked={deliveryTransaction}
+                                onChange={(e) => setDeliveryTransaction(e.target.checked)}
+                            />
+                            택배거래
+                        </label>
 
-                {deliveryTransaction && (
-                    <ProductDeliveryOptions formData={formData} handleChange={handleChange} errors={errors} />
-                )}
-                {directTransaction && (
-                    <ProductTradeArea formData={formData} handleChange={handleChange} />
-                )}
-                <button type="submit" className={styles.submitButton}>{productNo ? '수정 완료' : '작성 완료'}</button>
-            </form>
-            <ProductinsertPopup
-                show={popup.show}
-                onClose={() => setPopup({ ...popup, show: false })}
-                message={popup.message}
-                isConfirmation={popup.isConfirmation}
-            />
+                        <label>
+                            <input
+                                type='checkbox'
+                                name='directTransaction'
+                                checked={directTransaction}
+                                onChange={(e) => setDirectTransaction(e.target.checked)}
+                            />
+                            직거래
+                        </label>
+                    </div>
+
+                    {deliveryTransaction && (
+                        <ProductDeliveryOptions formData={formData} handleChange={handleChange} errors={errors} />
+                    )}
+                    {directTransaction && (
+                        <ProductTradeArea formData={formData} handleChange={handleChange} />
+                    )}
+                    <button type="submit" className={styles.submitButton}>{productNo ? '수정 완료' : '작성 완료'}</button>
+                </form>
+                <ProductinsertPopup
+                    show={popup.show}
+                    onClose={() => setPopup({ ...popup, show: false })}
+                    message={popup.message}
+                    isConfirmation={popup.isConfirmation}
+                    onConfirm={popup.onConfirm} // Pass onConfirm function
+                />
+            </div>
         </div>
     );
 }

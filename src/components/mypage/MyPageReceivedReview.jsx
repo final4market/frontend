@@ -26,8 +26,9 @@ export default function MyPageReceivedReview() {
           const profileResponse = await axios.get(`http://localhost:9999/api/member/myPageProfile/${memberId}`);
           setMyProfile(profileResponse.data);
 
-          const receivedReviewResponse = await axios.get(`http://localhost:9999/api/product/myPageReceivedReview/${memberId}`);
+          const receivedReviewResponse = await axios.get(`http://localhost:9999/api/member/myPageReceivedReview/${memberId}`);
           setMyReceivedReview(receivedReviewResponse.data);
+          console.log(receivedReviewResponse.data);
         } catch (error) {
           console.error("데이터를 가져오는 중 오류 발생:", error);
         }

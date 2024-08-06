@@ -1,7 +1,7 @@
 .my_info_side_container {
   width: 1000px;
   display: flex;
-  margin: 0px auto;
+  margin: 200px auto;
 }
 
 .my_info_main_container {
@@ -46,6 +46,7 @@
 .my_info_profile_guide {
   color: #9C9E9C;
   font-size: 12px;
+  margin-bottom: 5px;
 }
 
 .my_info_asterisk {

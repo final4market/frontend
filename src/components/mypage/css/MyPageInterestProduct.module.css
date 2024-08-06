@@ -1,7 +1,7 @@
 .interest_product_side_container {
   width: 1000px;
   display: flex;
-  margin: 0px auto;
+  margin: 200px auto;
 }
 
 .interest_product_main_container {
@@ -29,6 +29,7 @@
   font-size: 16px;
   margin: 10px;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 .interest_product_image {

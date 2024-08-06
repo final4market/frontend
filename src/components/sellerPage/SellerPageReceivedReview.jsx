@@ -24,7 +24,7 @@ export default function SellerPageReceivedReview() {
           const profileResponse = await axios.get(`http://localhost:9999/api/member/sellerPageProfile/${sellerId}`);
           setSellerProfile(profileResponse.data);
 
-          const receivedReviewResponse = await axios.get(`http://localhost:9999/api/product/sellerReceivedReview/${sellerId}`);
+          const receivedReviewResponse = await axios.get(`http://localhost:9999/api/member/sellerPageReceivedReview/${sellerId}`);
           setSellerReceivedReview(receivedReviewResponse.data);
         } catch (error) {
           console.error("데이터를 가져오는 중 오류 발생:", error);

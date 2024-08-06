@@ -11,25 +11,24 @@ import RegisterSuccess from './components/auth/Register/RegisterSuccess';
 import NaverAuthCallback from './components/auth/Login/NaverAuthCallback';
 import KakaoAuthCallback from './components/auth/Login/KakaoAuthCallback';
 import ProductRegistration from './components/productRegistration/ProductRegistration';
-import MyPageProductSalesList from './components/myPage/MyPageProductSalesList';
-import MyPageProductPurchaseHistory from './components/myPage/MyPageProductPurchaseHistory';
 import MyPageMyInfo from './components/myPage/MyPageMyInfo';
 import MyPageMyStore from './components/myPage/MyPageMyStore';
+import MyPageProductSalesList from './components/myPage/MyPageProductSalesList';
+import MyPageProductPurchaseHistory from './components/myPage/MyPageProductPurchaseHistory';
 import MyPageInterestProduct from './components/myPage/MyPageInterestProduct';
+import MyPageReviewList from './components/myPage/MyPageReviewList';
 import MyPageReceivedReview from './components/myPage/MyPageReceivedReview';
 import MyPageFollowList from './components/myPage/MyPageFollowList';
+import SellerPageSellerStore from './components/sellerPage/SellerPageSellerStore';
+import SellerPageReceivedReview from './components/sellerPage/SellerPageReceivedReview';
+import SellerPageFollowList from './components/sellerPage/SellerPageFollowList';
 import SubMain from './components/subPage/SubMain';
 import RoleProtectedRoute from './components/auth/RoleProtectedRoute';
 import './services/AxiosSetup';
 import { AuthProvider } from './services/AuthContext';
 import {MainPage} from'./components/mainpage/MainPage';
 import SearchBar from './components/mainpage/Search';
-import MyPageReviewList from './components/myPage/MyPageReviewList';
 import ProductRegistrationUpdate from './components/productRegistration/ProductRegistrationUpdate';
-import SellerPageSellerStore from './components/sellerPage/SellerPageSellerStore';
-import SellerPageReceivedReview from './components/sellerPage/SellerPageReceivedReview';
-import SellerPageFollowList from './components/sellerPage/SellerPageFollowList';
-
 function App() {
 
 
@@ -44,9 +43,9 @@ function App() {
           <Route path="/registerSuccess" element={<RegisterSuccess/>}/>          
           <Route path="/naverAuthCallback" element={<NaverAuthCallback/>}/>
           <Route path="/kakaoAuthCallback" element={<KakaoAuthCallback/>}/>
-          <Route path="/productPage" element={<SubMain/>}/>  
+          <Route path="/productPage/:productNo" element={<SubMain />} />  
           <Route path="/search" element={<SearchBar/>}/>     
-          <Route path="/productMainPage" element={<MainPage/>}/>
+          <Route path="/" element={<MainPage/>}/>
           <Route path="/sellerStore" element={<SellerPageSellerStore/>}/>
           <Route path="/sellerReceivedReview" element={<SellerPageReceivedReview/>}/>
           <Route path="/sellerFollowList" element={<SellerPageFollowList/>}/>
@@ -57,7 +56,7 @@ function App() {
             <Route path="/productRegisterUpdate/:productNo" element={<ProductRegistrationUpdate/>}/>
             <Route path="/sellHistory" element={<MyPageProductSalesList/>}/>       
             <Route path="/buyHistory" element={<MyPageProductPurchaseHistory/>}/>   
-            <Route path="/wroteReview" element={<MyPageReviewList/>}/>  
+            <Route path="/writedReview" element={<MyPageReviewList/>}/>  
             <Route path="/interestProduct" element={<MyPageInterestProduct/>}/>
             <Route path="/receivedReview" element={<MyPageReceivedReview/>}/>
             <Route path="/followList" element={<MyPageFollowList/>}/>

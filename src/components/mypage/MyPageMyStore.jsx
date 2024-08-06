@@ -37,9 +37,9 @@ export default function MyPageMyStore() {
 
   return (
     <div className={styles.my_store_header_container}>
-      <Header/>
+      <Header />
       <div className={styles.my_store_side_container}>
-        <MyPageSideBar/>
+        <MyPageSideBar />
         <div className={styles.my_store_main_container}>
           {myProfile.map((data, idx) => (
             <div className={styles.my_store_profile_container} key={idx}>
@@ -73,11 +73,13 @@ export default function MyPageMyStore() {
             {myProduct.length > 0 ? (
               myProduct.map((data, idx) => (
                 <div className={styles.my_store_product_list} key={idx}>
-                  <img
-                    className={styles.my_store_product_image}
-                    src={data.productImagePath}
-                    alt="상품 이미지"
-                  />
+                  <Link to={`/productPage/${data.productNo}`}>
+                    <img
+                      className={styles.my_store_product_image}
+                      src={data.productImagePath}
+                      alt="상품 이미지"
+                    />
+                  </Link>
                   <div className={styles.my_store_product_title}>
                     {data.productTitle}
                   </div>
